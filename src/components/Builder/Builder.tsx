@@ -120,7 +120,7 @@ const SideBarButton = styled.div`
   position: absolute;
   width: 30px;
   height: 30px;
-  margin: 10px;
+  margin: 20px;
   z-index: 1;
 
   background-color: #ffffff;
