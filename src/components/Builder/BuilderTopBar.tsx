@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { Button } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
@@ -7,9 +8,15 @@ import { useAtom } from "jotai";
 import localforage from "localforage";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { FiChevronRight } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { Flex, notSelect } from "../../utils/style";
-import StyledButton from "../StyledButton";
+import {
+  buttonDimensionsChakra,
+  buttonOutlineChakra,
+  buttonSolidChakra,
+  Flex,
+  notSelect,
+} from "../../utils/style";
 import { builderAtom, isThankYouAtom } from "./BuilderAtoms";
 
 const TabContainer = styled.div`
@@ -56,7 +63,7 @@ const TabTitle = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: calc(100% - 60px);
+  width: 100%;
   background: #ffffff;
   border-bottom: 1px solid #dddddd;
   display: flex;
@@ -134,11 +141,19 @@ const ButtonCss = css`
   height: 42px;
 `;
 
+const IconDiv = styled.div`
+  margin: 0px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default function BuilderTopBar(): JSX.Element {
   const router = useRouter();
   const [builder] = useAtom(builderAtom);
   const [isSaving, setIsSaving] = useState(false);
   const [isThankYou, setIsThankYou] = useAtom(isThankYouAtom);
+
   async function handleClickSave() {
     setIsSaving(true);
 
@@ -168,7 +183,9 @@ export default function BuilderTopBar(): JSX.Element {
       toast("Save", { type: "success" });
     }
 
-    setIsSaving(false);
+    setTimeout(() => {
+      setIsSaving(false);
+    }, 2000);
   }
 
   if (!builder) return <></>;
@@ -185,15 +202,13 @@ export default function BuilderTopBar(): JSX.Element {
           >
             Builder
           </TopBarTitle>
-          <div style={{ margin: "0px 8px 0px 10px" }}>
-            {/* <Icon name="navigation-arrow-right" /> */}
-          </div>
+          <IconDiv>
+            <FiChevronRight />
+          </IconDiv>
           <TopBarTitle>{builder.name}</TopBarTitle>
         </Flex>
         <TopBarSubTitle>
-          {/* <Icon name="fragment-icon" /> */}
-          &nbsp;Builder • Created on{" "}
-          {dayjs(builder.createdAt).format("MMM DD, YYYY @ h:MM a")}
+          Created on {dayjs(builder.createdAt).format("MMM DD, YYYY @ h:MM a")}
         </TopBarSubTitle>
       </TitleContainer>
       {builder.hasThankYouBuilder && (
@@ -233,29 +248,23 @@ export default function BuilderTopBar(): JSX.Element {
         </AnimateSharedLayout>
       )}
       <ButtonsContainer>
-        <StyledButton
-          inverted
-          css={ButtonCss}
-          onClick={() => {
-            window.open(
-              `${window.location.href
-                .split("form-builder")
-                .join("form-builder-preview")}&preview=true${
-                isThankYou ? "&thankyou" : ""
-              }`
-            );
-          }}
+        <Button
+          {...buttonDimensionsChakra}
+          {...buttonOutlineChakra}
+          onClick={() => {}}
         >
           Preview
-        </StyledButton>
+        </Button>
 
-        <StyledButton
-          css={ButtonCss}
+        <Button
+          {...buttonDimensionsChakra}
+          {...buttonSolidChakra}
           isLoading={isSaving}
+          loadingText="Saving"
           onClick={handleClickSave}
         >
           Save
-        </StyledButton>
+        </Button>
       </ButtonsContainer>
     </Wrapper>
   );

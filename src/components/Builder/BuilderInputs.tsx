@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+
+import { Button } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { SetStateAction, useAtom } from "jotai";
@@ -7,9 +9,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
 import { toast } from "react-toastify";
 import { validationEmail } from "../../utils/Validation";
-import StyledButton from "../StyledButton";
 import StyledInput from "../StyledInput";
-import { builderAtom, builderCheckboxAtom } from "./BuilderAtoms";
+import { builderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import { ItemType } from "./BuilderTypes";
 
@@ -40,12 +41,13 @@ const InputCss = css`
   }
 `;
 
-const ButtonCss = css`
-  width: 340px;
-  font-size: 18px;
-  height: 46px;
-  font-weight: bold;
-`;
+const buttonChakra = {
+  width: 340,
+  heigh: 46,
+  fontSize: 18,
+  fontWeight: "bold",
+  color: "white",
+};
 
 interface Props {
   item: ItemType;
@@ -150,14 +152,6 @@ export default function BuilderInputs(props: Props): JSX.Element {
               box-shadow: 0px 0px 6px ${`${props.item.state?.formColor}80`};
               border: 1px solid ${props.item.state?.formColor};
             }
-          `}
-        }
-        button {
-          ${ButtonCss};
-          ${props.item.state?.formColor &&
-          css`
-            background-color: ${props.item.state?.formColor};
-            border-color: ${props.item.state?.formColor};
           `}
         }
       `}
@@ -271,15 +265,21 @@ export default function BuilderInputs(props: Props): JSX.Element {
           </ReactTooltip>
         )} */}
 
-        <StyledButton
+        <Button
+          {...buttonChakra}
+          bgColor={
+            props.item.state?.formColor
+              ? props.item.state?.formColor
+              : DEFAULT_COLOR
+          }
           isLoading={isLoading}
-          disable={disable}
+          disabled={disable}
           onClick={handleClick}
         >
           {props.item.state?.buttonText
             ? props.item.state.buttonText
             : "Get Started"}
-        </StyledButton>
+        </Button>
       </div>
     </Container>
   );

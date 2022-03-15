@@ -21,7 +21,6 @@ import { AnimateSharedLayout, motion } from "framer-motion";
 import { useAtom } from "jotai";
 import localforage from "localforage";
 import { nanoid } from "nanoid";
-import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { isMobileSafari, isSafari } from "react-device-detect";
 import {
@@ -267,7 +266,7 @@ interface Props {
 }
 
 export default function Builder(props: Props) {
-  const [itemList, setItemsList] = useAtom(itemListAtom);
+  const [itemList] = useAtom(itemListAtom);
   const [indexes, setIndexes] = useAtom(indexesAtom);
   const [items, setItems] = useAtom(itemsAtom);
   const [selectedItem, setSelectedItem] = useAtom(selectedItemAtom);

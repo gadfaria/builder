@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../components/Builder/BuilderConsts";
 
 export const notSelect = css`
   -webkit-touch-callout: none; /* iOS Safari */
@@ -29,3 +30,22 @@ export const TooltipText = styled.span`
   letter-spacing: 0px;
   color: #ffffff;
 `;
+
+export const buttonDimensionsChakra = {
+  width: 100,
+  heigth: 42,
+};
+
+export const buttonOutlineChakra = {
+  bgColor: "white",
+  color: DEFAULT_COLOR,
+  borderColor: DEFAULT_COLOR,
+  borderWidth: 1,
+  _hover: { opacity: 0.5 },
+};
+
+export const buttonSolidChakra = {
+  bgColor: DEFAULT_COLOR,
+  color: "white",
+  _hover: { bg: DEFAULT_COLOR + "80" },
+};
