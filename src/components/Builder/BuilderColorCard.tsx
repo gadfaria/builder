@@ -52,7 +52,7 @@ type Props = {
   handleChangeColor: (color?: string) => void;
 };
 
-export default function FormColorCard(props: Props) {
+export default function BuilderColorCard(props: Props) {
   const [openColor, setOpenColor] = useState<boolean>(false);
 
   const colorDivRef = useClickOutside(() => {

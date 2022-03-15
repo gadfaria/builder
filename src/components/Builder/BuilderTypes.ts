@@ -1,7 +1,14 @@
 import BuilderEditor from "./BuilderEditor";
 import BuilderInputs from "./BuilderInputs";
 
-export type Types = "TEXT" | "IMAGE" | "FORM" | "MAIN" | "CHECKBOX" | "FOOTER";
+export type Types =
+  | "TEXT"
+  | "BUTTON"
+  | "IMAGE"
+  | "FORM"
+  | "MAIN"
+  | "CHECKBOX"
+  | "FOOTER";
 
 export interface IBuilder {
   name: string;

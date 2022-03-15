@@ -24,7 +24,7 @@ const Label = styled.div`
 `;
 
 const Input = styled.input`
-  width: min-content;
+  width: 100%;
   border: none;
   text-indent: 5px;
 `;

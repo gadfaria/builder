@@ -39,6 +39,7 @@ import {
   itemsAtom,
   selectedItemAtom,
 } from "./BuilderAtoms";
+import BuilderButton from "./BuilderButton";
 import BuilderCheckbox from "./BuilderCheckbox";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import BuilderEditor from "./BuilderEditor";
@@ -195,6 +196,11 @@ const TYPES: { label: string; type: Types; icon: string }[] = [
   {
     label: "Text",
     type: "TEXT",
+    icon: "../icons/builder/text.svg",
+  },
+  {
+    label: "Button",
+    type: "BUTTON",
     icon: "../icons/builder/text.svg",
   },
   {
@@ -484,6 +490,8 @@ export default function Builder(props: Props) {
         return { type: "IMAGE", content: BuilderImage };
       case "CHECKBOX":
         return { type: "CHECKBOX", content: BuilderCheckbox };
+      case "BUTTON":
+        return { type: "BUTTON", content: BuilderButton };
       default:
         return { type: "TEXT", content: BuilderEditor };
     }

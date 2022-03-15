@@ -9,6 +9,9 @@ import {
   CheckboxGroup,
   HStack,
   Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
   Select,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
@@ -20,6 +23,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
 import StyledAutocompleteSelect from "../AutoComplete/AutoCompleteSelect";
 import { SideBarText } from "./Builder";
+import BuilderColorCard from "./BuilderColorCard";
 import {
   DEFAULT_CHECKBOX_COLOR,
   DEFAULT_COLOR,
@@ -29,7 +33,6 @@ import {
 import BuilderInputNumber from "./BuilderInputNumber";
 import BuilderInputRange from "./BuilderInputRange";
 import { ItemType } from "./BuilderTypes";
-import FormColorCard from "./ColorCard";
 
 const Container = styled.div`
   width: 100%;
@@ -344,7 +347,7 @@ export default function BuilderSidebar(props: Props) {
           )}
           {selectedBackground === "Color" && (
             <Wrapper>
-              <FormColorCard
+              <BuilderColorCard
                 isBackground
                 label="Background Color"
                 color={item.style?.backgroundColor}
@@ -408,7 +411,7 @@ export default function BuilderSidebar(props: Props) {
               margin-bottom: 10px;
             `}
           >
-            <FormColorCard
+            <BuilderColorCard
               isBackground
               label="Background Color"
               color={item.style?.backgroundColor}
@@ -595,7 +598,7 @@ export default function BuilderSidebar(props: Props) {
             </AccordionItem>
           </Accordion>
 
-          <Accordion width="100%" allowMultiple >
+          <Accordion width="100%" allowMultiple>
             <AccordionItem>
               <AccordionButton
                 _focus={{ outline: "none" }}
@@ -665,7 +668,7 @@ export default function BuilderSidebar(props: Props) {
 
                 <Line />
 
-                <FormColorCard
+                <BuilderColorCard
                   label="Border Color"
                   color={item.style?.borderColor || "#e2e8f0"}
                   handleChangeColor={(color) => {
@@ -737,7 +740,7 @@ export default function BuilderSidebar(props: Props) {
                   </CheckboxGroup>
 
                   <Line />
-                  <FormColorCard
+                  <BuilderColorCard
                     label="Form color"
                     color={item.state?.formColor || DEFAULT_COLOR}
                     handleChangeColor={(color) => {
@@ -747,6 +750,67 @@ export default function BuilderSidebar(props: Props) {
                       });
                     }}
                   />
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          )}
+
+          {item.type === "BUTTON" && (
+            <Accordion width="100%" allowMultiple>
+              <AccordionItem>
+                <AccordionButton
+                  _focus={{ outline: "none" }}
+                  className="accordion-button"
+                  padding="10px"
+                >
+                  <div className="title-button">Button</div>
+                  <AccordionIcon />
+                </AccordionButton>
+
+                <AccordionPanel borderBottom="1px solid #EBEBEB">
+                  <Title>Button Text</Title>
+                  <Input
+                    value={item.state?.buttonText || "Get Started"}
+                    focusBorderColor={DEFAULT_COLOR}
+                    onChange={(evt) => {
+                      setItem({
+                        ...item,
+                        state: {
+                          ...item.state,
+                          buttonText: evt.target.value,
+                        },
+                      });
+                    }}
+                  />
+
+                  <Line />
+                  <BuilderColorCard
+                    label="Button Color"
+                    color={item.style?.color || DEFAULT_COLOR}
+                    handleChangeColor={(color) => {
+                      setItem({
+                        ...item,
+                        style: { ...item.style, color },
+                      });
+                    }}
+                  />
+
+                  <Line />
+                  <Title>Button Redirect</Title>
+                  <InputGroup size="sm">
+                    <InputLeftAddon children="https://" />
+                    <Input
+                      value={item.state.url}
+                      placeholder="site"
+                      onChange={(e) =>
+                        setItem({
+                          ...item,
+                          state: { ...item.state, url: e.target.value },
+                        })
+                      }
+                    />
+                    <InputRightAddon children=".com" />
+                  </InputGroup>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
@@ -765,7 +829,7 @@ export default function BuilderSidebar(props: Props) {
                 </AccordionButton>
 
                 <AccordionPanel borderBottom="1px solid #EBEBEB">
-                  <FormColorCard
+                  <BuilderColorCard
                     label="Color"
                     color={item.style?.checkboxColor || DEFAULT_CHECKBOX_COLOR}
                     handleChangeColor={(color?: string) => {
@@ -780,7 +844,7 @@ export default function BuilderSidebar(props: Props) {
             </Accordion>
           )}
 
-          {!["IMAGE", "FORM"].includes(item.type) && (
+          {!["IMAGE", "FORM", "BUTTON"].includes(item.type) && (
             <>
               <Accordion width="100%" allowMultiple>
                 <AccordionItem>
@@ -831,7 +895,7 @@ export default function BuilderSidebar(props: Props) {
 
                     <Line />
 
-                    <FormColorCard
+                    <BuilderColorCard
                       label="Font Color"
                       color={item.style?.color || "#1A202C"}
                       handleChangeColor={(color?: string) => {
@@ -877,7 +941,7 @@ export default function BuilderSidebar(props: Props) {
                 </AccordionButton>
 
                 <AccordionPanel borderBottom="1px solid #EBEBEB">
-                  <FormColorCard
+                  <BuilderColorCard
                     label="Link Color"
                     color={item.style?.linkColor || DEFAULT_COLOR_LINK}
                     handleChangeColor={(color?: string) => {
@@ -890,7 +954,7 @@ export default function BuilderSidebar(props: Props) {
 
                   <Line />
 
-                  <FormColorCard
+                  <BuilderColorCard
                     label="Visited Link Color"
                     color={
                       item.style?.visitedLinkColor || DEFAULT_VISITED_COLOR_LINK
