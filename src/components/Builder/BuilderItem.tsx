@@ -109,7 +109,7 @@ interface Props {
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 
-export default function FormBuilderItem(props: PropsWithChildren<Props>) {
+export default function BuilderItem(props: PropsWithChildren<Props>) {
   const { isSelected, onClick, itemAtom, index, isPreview, over } = props;
 
   const [item, setItem] = useAtom(itemAtom);

@@ -41,7 +41,7 @@ interface Props {
   min: number;
 }
 
-export default function FormInputRange(props: Props) {
+export default function BuilderInputRange(props: Props) {
   return (
     <>
       <Label>

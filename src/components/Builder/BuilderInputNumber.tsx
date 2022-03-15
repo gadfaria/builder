@@ -61,7 +61,7 @@ interface Props {
   interval?: number;
 }
 
-export default function FormInputNumber(props: Props) {
+export default function BuilderInputNumber(props: Props) {
   return (
     <>
       <Label>{props.label}</Label>

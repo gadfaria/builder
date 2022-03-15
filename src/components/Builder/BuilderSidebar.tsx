@@ -17,17 +17,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
 import { ItemType, SideBarText } from "./Builder";
-import StyledInput from "./StyledInput";
-import StyledSelect from "./StyledSelect";
+import StyledInput from "../StyledInput";
+import StyledSelect from "../StyledSelect";
 import {
   DEFAULT_CHECKBOX_COLOR,
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,
 } from "./BuilderConsts";
 import FormColorCard from "./ColorCard";
-import FormInputNumber from "./InputFontSize";
-import FormInputRange from "./InputRange";
-import StyledAutocompleteSelect from "./AutoCompleteSelect";
+import BuilderInputNumber from "./BuilderInputNumber";
+import BuilderInputRange from "./BuilderInputRange";
+import StyledAutocompleteSelect from "../AutoComplete/AutoCompleteSelect";
+
 const Container = styled.div`
   width: 100%;
   height: fit-content;
@@ -184,7 +185,7 @@ const BACKGROUND_OPTIONS = [
   { id: "1", name: "Image" },
   { id: "2", name: "Color" },
 ];
-export default function FormBuilderSidebar(props: Props) {
+export default function BuilderSidebar(props: Props) {
   const { itemAtom } = props;
 
   const [item, setItem] = useAtom(itemAtom);
@@ -316,7 +317,7 @@ export default function FormBuilderSidebar(props: Props) {
                 </BackgroundImage>
               </Wrapper>
               <Wrapper>
-                <FormInputRange
+                <BuilderInputRange
                   label="Opacity"
                   max={100}
                   min={0}
@@ -376,7 +377,7 @@ export default function FormBuilderSidebar(props: Props) {
             </Checkbox>
 
             {!autoWidth && (
-              <FormInputRange
+              <BuilderInputRange
                 label="Width"
                 value={
                   parseInt(item.style?.width?.replace("px", "") || "1200") - 4
@@ -427,7 +428,7 @@ export default function FormBuilderSidebar(props: Props) {
               </AccordionButton>
 
               <AccordionPanel borderBottom="1px solid #EBEBEB">
-                <FormInputRange
+                <BuilderInputRange
                   label="Top"
                   max={100}
                   min={0}
@@ -445,7 +446,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Bottom"
                   max={100}
                   min={0}
@@ -463,7 +464,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Right"
                   max={100}
                   min={0}
@@ -481,7 +482,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Left"
                   max={100}
                   min={0}
@@ -514,7 +515,7 @@ export default function FormBuilderSidebar(props: Props) {
               </AccordionButton>
 
               <AccordionPanel borderBottom="1px solid #EBEBEB">
-                <FormInputRange
+                <BuilderInputRange
                   label="Top"
                   max={100}
                   min={-10}
@@ -532,7 +533,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Bottom"
                   max={100}
                   min={-10}
@@ -550,7 +551,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Right"
                   max={100}
                   min={-10}
@@ -568,7 +569,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Left"
                   max={100}
                   min={-10}
@@ -601,7 +602,7 @@ export default function FormBuilderSidebar(props: Props) {
               </AccordionButton>
 
               <AccordionPanel borderBottom="1px solid #EBEBEB">
-                <FormInputRange
+                <BuilderInputRange
                   label="Border Width"
                   max={100}
                   min={0}
@@ -619,7 +620,7 @@ export default function FormBuilderSidebar(props: Props) {
                   }
                 />
                 <Line />
-                <FormInputRange
+                <BuilderInputRange
                   label="Border Radius"
                   max={100}
                   min={0}
@@ -802,7 +803,7 @@ export default function FormBuilderSidebar(props: Props) {
 
                     <Line />
 
-                    <FormInputNumber
+                    <BuilderInputNumber
                       label="Font Size"
                       value={parseInt(
                         item.style?.fontSize?.split("px").join("") || "14"
@@ -833,7 +834,7 @@ export default function FormBuilderSidebar(props: Props) {
 
                     <Line />
 
-                    <FormInputNumber
+                    <BuilderInputNumber
                       interval={0.05}
                       label="Line Spacing"
                       value={lineSpacing}

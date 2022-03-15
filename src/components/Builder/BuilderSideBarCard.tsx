@@ -4,7 +4,8 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import { customTooltip, TooltipText, Types } from "./Builder";
+import { customTooltip } from "../../utils/style";
+import { TooltipText, Types } from "./Builder";
 
 const Container = styled.div`
   /* z-index: 10; */
@@ -65,7 +66,7 @@ type Props = {
 
 const CAN_ONLY_HAVE_ONE = ["FOOTER", "CHECKBOX", "FORM"];
 
-export default function FormBuilderSideBarCard(props: Props) {
+export default function BuilderSideBarCard(props: Props) {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: props.type,

@@ -6,10 +6,10 @@ import React, { useEffect, useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
 import { toast } from "react-toastify";
-import StyledButton from "./StyledButton";
+import StyledButton from "../StyledButton";
 import { formAtom, formBuilderCheckboxAtom, ItemType } from "./Builder";
 import { validationEmail } from "../../utils/Validation";
-import StyledInput from "./StyledInput";
+import StyledInput from "../StyledInput";
 
 const Container = styled.div<{ isSelected?: boolean }>`
   padding: ${(props) => (props.isSelected ? "10px" : "0px")};
@@ -52,7 +52,7 @@ interface Props {
   isPreview?: boolean;
 }
 
-export default function FormBuilderInputs(props: Props): JSX.Element {
+export default function BuilderInputs(props: Props): JSX.Element {
   const [form] = useAtom(formAtom);
   const [email, setEmail] = useState("");
   const emailRef = useRef<HTMLInputElement>(null);

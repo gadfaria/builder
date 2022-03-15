@@ -28,7 +28,7 @@ import {
   ItemChildrenContainer,
   ItemRelative,
 } from "./BuilderItem";
-import FormEditorMenuBar from "./EditorMenuBar";
+import BuilderEditorMenuBar from "./BuilderEditorMenuBar";
 
 interface Props {
   isPreview: boolean;
@@ -37,7 +37,7 @@ interface Props {
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 
-export default function FormBuilderFooter(props: Props) {
+export default function BuilderFooter(props: Props) {
   const { isSelected, isPreview, onClick, index } = props;
   const [itemList, setItemsList] = useAtom(itemListAtom);
   const [item, setItem] = useAtom(itemList[index]);
@@ -192,7 +192,7 @@ export default function FormBuilderFooter(props: Props) {
             <>
               <EditorContent editor={editor} />
               {editor && isSelected && !isPreview && (
-                <FormEditorMenuBar
+                <BuilderEditorMenuBar
                   editor={editor}
                   containerRef={ref?.current}
                 />

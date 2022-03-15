@@ -17,7 +17,7 @@ import { SetStateAction } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
 import { ItemType } from "./Builder";
-import FormEditorMenuBar from "./EditorMenuBar";
+import BuilderEditorMenuBar from "./BuilderEditorMenuBar";
 
 export const Container = styled(motion.div)<{ isSelected: boolean }>`
   height: 100%;
@@ -73,7 +73,7 @@ interface Props {
   isPreview?: boolean;
 }
 
-export default function FormBuilderEditor(props: Props) {
+export default function BuilderEditor(props: Props) {
   const { isSelected, item, setItem, isPreview } = props;
 
   const editor = useEditor({
@@ -176,7 +176,7 @@ export default function FormBuilderEditor(props: Props) {
       )}
       <motion.div layoutId={`editor-menu-${item.id}`}>
         {editor && isSelected && (
-          <FormEditorMenuBar editor={editor} containerRef={ref?.current} />
+          <BuilderEditorMenuBar editor={editor} containerRef={ref?.current} />
         )}
       </motion.div>
     </Container>

@@ -83,7 +83,7 @@ const ButtonsWrapperModal = styled.div`
   grid-gap: 16px;
 `;
 
-export default function FormEditorMenuBar(props: Props) {
+export default function BuilderEditorMenuBar(props: Props) {
   const linkURL = useRef<string>("");
 
   if (!props.editor || !props.containerRef) {

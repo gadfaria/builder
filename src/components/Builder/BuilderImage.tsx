@@ -31,7 +31,7 @@ const EmptyImageCss = css`
   }
 `;
 
-const FormBuilderImage = (props: Props) => {
+const BuilderImage = (props: Props) => {
   const { isSelected, item, setItem, isPreview } = props;
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -103,4 +103,4 @@ const FormBuilderImage = (props: Props) => {
   );
 };
 
-export default FormBuilderImage;
+export default BuilderImage;

@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import React, { useEffect, useRef, useState } from "react";
-import useClickOutside from "../../hooks/useClickOutside";
-import { getScrollParent } from "../../utils/DOMHelper";
+import useClickOutside from "../hooks/useClickOutside";
+import { getScrollParent } from "../utils/DOMHelper";
 interface ContainerProps {
   disabled?: boolean;
 }

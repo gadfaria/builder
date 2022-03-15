@@ -49,7 +49,7 @@ interface Props {
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 
-export default function FormBuilderMain(props: PropsWithChildren<Props>) {
+export default function BuilderMain(props: PropsWithChildren<Props>) {
   const { isSelected, onClick, itemAtom, index, isPreview, children } = props;
 
   const onDrop = useCallback((acceptedFiles) => {

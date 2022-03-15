@@ -11,7 +11,7 @@ import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
 import { formBuilderCheckboxAtom } from "./Builder";
 import { Empty } from "./BuilderEditor";
-import StyledCheckBox from "./StyledCheckBox";
+import StyledCheckBox from "../StyledCheckBox";
 
 const Container = styled.div`
   width: 100%;
@@ -48,7 +48,7 @@ const EditorContainer = styled.div<{ isPreview: boolean; isSelected: boolean }>`
     `};
 `;
 
-export default function FormBuilderCheckbox(props: any): JSX.Element {
+export default function BuilderCheckbox(props: any): JSX.Element {
   const { item, setItem, isPreview, isSelected } = props;
   const [checkbox, setCheckbox] = useAtom(formBuilderCheckboxAtom);
 

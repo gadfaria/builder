@@ -6,7 +6,7 @@ import React, {
   DetailedHTMLProps,
   PropsWithChildren,
 } from "react";
-import { notSelect } from "../../utils/style";
+import { notSelect } from "../utils/style";
 
 export interface Props
   extends DetailedHTMLProps<

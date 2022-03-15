@@ -31,18 +31,17 @@ import {
 import ReactTooltip from "react-tooltip";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { customTooltip } from "../../utils/style";
-import FormBuilderCheckbox from "./BuilderCheckbox";
-import FormBuilderEditor from "./BuilderEditor";
-import FormBuilderFooter from "./BuilderFooter";
-import FormBuilderImage from "./BuilderImage";
-import FormBuilderInputs from "./BuilderInputs";
-import FormBuilderItem from "./BuilderItem";
-import FormBuilderMain from "./BuilderMain";
-import FormBuilderSidebar from "./BuilderSidebar";
-import FormBuilderSideBarCard from "./BuilderSideBarCard";
-import FormBuilderTopBar from "./BuilderTopBar";
+import BuilderCheckbox from "./BuilderCheckbox";
+import BuilderEditor from "./BuilderEditor";
+import BuilderFooter from "./BuilderFooter";
+import BuilderImage from "./BuilderImage";
+import BuilderInputs from "./BuilderInputs";
+import BuilderItem from "./BuilderItem";
+import BuilderMain from "./BuilderMain";
+import BuilderSidebar from "./BuilderSidebar";
+import BuilderSideBarCard from "./BuilderSideBarCard";
+import BuilderTopBar from "./BuilderTopBar";
 import { splitAtomWithFallback } from "./splitAtomWithFallback";
-
 
 export const TooltipText = styled.span`
   font-size: 14px;
@@ -221,27 +220,27 @@ const TYPES: { label: string; type: Types; icon: string }[] = [
   {
     label: "Text",
     type: "TEXT",
-    icon: "../icons/formBuilder/text.svg",
+    icon: "../icons/builder/text.svg",
   },
   {
     label: "Image",
     type: "IMAGE",
-    icon: "../icons/formBuilder/image.svg",
+    icon: "../icons/builder/image.svg",
   },
   {
     label: "Checkbox",
     type: "CHECKBOX",
-    icon: "../icons/formBuilder/checkbox.svg",
+    icon: "../icons/builder/checkbox.svg",
   },
   {
     label: "Form",
     type: "FORM",
-    icon: "../icons/formBuilder/form.svg",
+    icon: "../icons/builder/form.svg",
   },
   {
     label: "Footer",
     type: "FOOTER",
-    icon: "../icons/formBuilder/footer.svg",
+    icon: "../icons/builder/footer.svg",
   },
 ];
 
@@ -249,7 +248,7 @@ const THANK_YOU_TYPES = ["TEXT", "IMAGE", "FOOTER"];
 export interface ItemType {
   id: string;
   type: Types;
-  content?: typeof FormBuilderInputs | typeof FormBuilderEditor;
+  content?: typeof BuilderInputs | typeof BuilderEditor;
   style?: {
     fontFamily?: string;
     color?: string;
@@ -570,13 +569,13 @@ export default function Builder(props: Props) {
   } {
     switch (type) {
       case "FORM":
-        return { type: "FORM", content: FormBuilderInputs };
+        return { type: "FORM", content: BuilderInputs };
       case "IMAGE":
-        return { type: "IMAGE", content: FormBuilderImage };
+        return { type: "IMAGE", content: BuilderImage };
       case "CHECKBOX":
-        return { type: "CHECKBOX", content: FormBuilderCheckbox };
+        return { type: "CHECKBOX", content: BuilderCheckbox };
       default:
-        return { type: "TEXT", content: FormBuilderEditor };
+        return { type: "TEXT", content: BuilderEditor };
     }
   }
 
@@ -741,7 +740,7 @@ export default function Builder(props: Props) {
   if (isLoading || !form) return <></>;
   return (
     <>
-      {!props.isPreview && <FormBuilderTopBar />}
+      {!props.isPreview && <BuilderTopBar />}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -795,7 +794,7 @@ export default function Builder(props: Props) {
                     return;
 
                   return (
-                    <FormBuilderSideBarCard
+                    <BuilderSideBarCard
                       key={type.type}
                       {...type}
                       alreadyExists={
@@ -811,7 +810,7 @@ export default function Builder(props: Props) {
           )}
 
           {itemList[0] && (
-            <FormBuilderMain
+            <BuilderMain
               onClick={(e) => {
                 hideSideBars();
                 e.stopPropagation();
@@ -846,7 +845,7 @@ export default function Builder(props: Props) {
                         {!isChanging &&
                           indexes.map((index) =>
                             index > 0 && items[index].type !== "FOOTER" ? (
-                              <FormBuilderItem
+                              <BuilderItem
                                 over={
                                   overPosition?.id === index.toString()
                                     ? overPosition.over
@@ -870,7 +869,7 @@ export default function Builder(props: Props) {
                   </Content>
                   {!isChanging &&
                     items.find((i) => i.type === "FOOTER" && !i.deleted) && (
-                      <FormBuilderFooter
+                      <BuilderFooter
                         key="footer"
                         index={items.findIndex(
                           (i) => i.type === "FOOTER" && !i.deleted
@@ -896,7 +895,7 @@ export default function Builder(props: Props) {
                     )}
                 </Wrapper>
               )}
-            </FormBuilderMain>
+            </BuilderMain>
           )}
 
           {!props.isPreview && (
@@ -938,7 +937,7 @@ export default function Builder(props: Props) {
               }}
             >
               {!props.isPreview && selectedItem && !!itemList[selectedItem] && (
-                <FormBuilderSidebar itemAtom={itemList[selectedItem]} />
+                <BuilderSidebar itemAtom={itemList[selectedItem]} />
               )}
             </Sidebar>
           )}

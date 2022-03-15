@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Flex, notSelect } from "../../utils/style";
 import { formAtom, isThankYouAtom } from "./Builder";
-import StyledButton from "./StyledButton";
+import StyledButton from "../StyledButton";
 
 const TabContainer = styled.div`
   width: 270px;
@@ -134,7 +134,7 @@ const ButtonCss = css`
   height: 42px;
 `;
 
-export default function FormBuilderTopBar(): JSX.Element {
+export default function BuilderTopBar(): JSX.Element {
   const router = useRouter();
   const [form] = useAtom(formAtom);
   const [isSaving, setIsSaving] = useState(false);
