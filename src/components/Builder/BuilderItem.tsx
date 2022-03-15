@@ -14,13 +14,9 @@ import {
   FaRegTrashAlt,
 } from "react-icons/fa";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
+import { indexesAtom, itemsAtom, ItemType, selectedItemAtom } from "./Builder";
 import {
-  indexesAtom,
-  itemsAtom,
-  ItemType,
-  selectedItemAtom,
-} from "./Builder";
-import {
+  DEFAULT_COLOR,
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,
 } from "./BuilderConsts";
@@ -47,8 +43,8 @@ export const ItemAction = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fb972e;
-  border: 2px solid #fb972e;
+  background-color: ${DEFAULT_COLOR};
+  border: 2px solid ${DEFAULT_COLOR};
   border-radius: 4px;
   margin-bottom: 10px;
   transition: opacity 0.3s;
@@ -92,8 +88,8 @@ export const ItemChildrenContainer = styled(
   height: 100%;
   background-color: transparent;
   border-radius: 10px;
-  border: 2px solid #fb972e;
-  border-color: ${(props) => (props.isSelected ? "#fb972e" : "transparent")};
+  border: 2px solid ${DEFAULT_COLOR};
+  border-color: ${(props) => (props.isSelected ? DEFAULT_COLOR : "transparent")};
   min-height: ${(props) =>
     props.isSelected ? (props.isText ? "135px" : "70px") : "auto"};
 `;
@@ -180,7 +176,7 @@ export default function BuilderItem(props: PropsWithChildren<Props>) {
           svg {
             width: 2.5em;
             height: 2.5em;
-            color: #fb972e;
+            color: ${DEFAULT_COLOR};
           }
         `}
         layoutId={layoutId}
@@ -191,7 +187,7 @@ export default function BuilderItem(props: PropsWithChildren<Props>) {
             width: 100%;
             height: 4px;
             margin: 10px -16px 10px;
-            background: #fb972e 0% 0% no-repeat padding-box;
+            background: ${DEFAULT_COLOR} 0% 0% no-repeat padding-box;
           `}
         />
         <IoMdArrowDropleft />

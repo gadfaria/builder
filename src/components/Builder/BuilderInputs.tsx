@@ -10,6 +10,7 @@ import StyledButton from "../StyledButton";
 import { formAtom, formBuilderCheckboxAtom, ItemType } from "./Builder";
 import { validationEmail } from "../../utils/Validation";
 import StyledInput from "../StyledInput";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 
 const Container = styled.div<{ isSelected?: boolean }>`
   padding: ${(props) => (props.isSelected ? "10px" : "0px")};
@@ -220,9 +221,9 @@ export default function BuilderInputs(props: Props): JSX.Element {
             onFocus={() =>
               setInputPhoneCss((i) => ({
                 ...i,
-                borderColor: props.item.state?.formColor || "#fb972e",
+                borderColor: props.item.state?.formColor || DEFAULT_COLOR,
                 boxShadow: `0px 0px 6px ${`${
-                  props.item.state?.formColor || "#fb972e"
+                  props.item.state?.formColor || DEFAULT_COLOR
                 }80`}`,
               }))
             }

@@ -5,6 +5,7 @@ import React, {
   forwardRef,
   InputHTMLAttributes,
 } from "react";
+import { DEFAULT_COLOR } from "./Builder/BuilderConsts";
 
 export type RefUtil<T> =
   | ((instance: T | null) => void)
@@ -32,8 +33,8 @@ const Input = styled.input<Props>`
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
 
   :focus {
-    box-shadow: 0px 0px 6px #fb972e4d;
-    border: 1px solid #fb972e;
+    box-shadow: 0px 0px 6px ${DEFAULT_COLOR + "4d"};
+    border: 1px solid ${DEFAULT_COLOR};
   }
 
   &::placeholder {

@@ -32,6 +32,7 @@ import ReactTooltip from "react-tooltip";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { customTooltip } from "../../utils/style";
 import BuilderCheckbox from "./BuilderCheckbox";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 import BuilderEditor from "./BuilderEditor";
 import BuilderFooter from "./BuilderFooter";
 import BuilderImage from "./BuilderImage";
@@ -160,10 +161,10 @@ const SideBarButton = styled.div`
   }
 
   :hover {
-    border-color: #fb972e;
+    border-color: ${DEFAULT_COLOR};
 
     svg {
-      color: #fb972e;
+      color: ${DEFAULT_COLOR};
     }
   }
 `;

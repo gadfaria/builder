@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -46,10 +47,10 @@ const Button = styled.div`
   }
 
   :hover {
-    border-color: #fb972e80;
+    border-color: ${DEFAULT_COLOR + "80"};
 
     svg {
-      color: #fb972e;
+      color: ${DEFAULT_COLOR};
     }
   }
 `;

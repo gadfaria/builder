@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import React, { useEffect, useRef, useState } from "react";
 import useClickOutside from "../hooks/useClickOutside";
 import { getScrollParent } from "../utils/DOMHelper";
+import { DEFAULT_COLOR } from "./Builder/BuilderConsts";
 interface ContainerProps {
   disabled?: boolean;
 }
@@ -75,7 +76,7 @@ const DropItem = styled.div`
   color: ${(props: DropItemProps) => (props.selected ? "#fff" : "#2f2f2f")};
 
   background-color: ${(props: DropItemProps) =>
-    props.selected ? "#fb972e" : props.preSelected ? "#ebebeb" : "#fff"};
+    props.selected ? DEFAULT_COLOR : props.preSelected ? "#ebebeb" : "#fff"};
 `;
 
 const Name = styled.div`

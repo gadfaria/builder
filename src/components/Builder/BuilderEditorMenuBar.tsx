@@ -16,6 +16,7 @@ import {
   FaUnderline,
   FaUnlink,
 } from "react-icons/fa";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 
 interface Props {
   editor: Editor;
@@ -33,7 +34,7 @@ const Wrapper = styled.div`
   height: 36px;
   display: flex;
   flex-direction: row;
-  background-color: #fb972e;
+  background-color: ${DEFAULT_COLOR};
   border-radius: 4px;
 
   font-family: Arial, Helvetica, sans-serif !important;

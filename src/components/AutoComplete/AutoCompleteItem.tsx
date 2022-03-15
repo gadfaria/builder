@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { CSSProperties } from "react";
 import { FaCheck } from "react-icons/fa";
+import { DEFAULT_COLOR } from "../Builder/BuilderConsts";
 
 interface IListItemContainer {
   isHover: boolean;
@@ -22,14 +23,14 @@ const ListItemContainer = styled.div<IListItemContainer>`
   justify-content: space-between;
   align-items: flex-start;
   background-color: ${(props) => (props.isHover ? "#FFF2E5" : "#fff")};
-  color: ${(props) => (props.isHover ? "#fb972e" : "#000")};
+  color: ${(props) => (props.isHover ? DEFAULT_COLOR : "#000")};
   font-family: ${(props) => props.font && props.font};
 
   ${(props) =>
     props.isSelected &&
     css`
       background-color: #fcebd8;
-      color: #fb972e;
+      color: ${DEFAULT_COLOR};
     `}
 
   ${(props) =>
@@ -37,7 +38,7 @@ const ListItemContainer = styled.div<IListItemContainer>`
     css`
       :hover {
         background-color: #fff2e5;
-        color: #fb972e;
+        color: ${DEFAULT_COLOR};
       }
     `}
 `;
@@ -109,7 +110,7 @@ export function AutoCompleteSelectItem(props: Props): JSX.Element {
         {customItemToolbar ? customItemToolbar : null}
 
         {isSelected && !removeCheckIcon && (
-          <FaCheck color={"#FB972E"} width={14} height={14} />
+          <FaCheck color={DEFAULT_COLOR} width={14} height={14} />
         )}
       </Row>
     </ListItemContainer>

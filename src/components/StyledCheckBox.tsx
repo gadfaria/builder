@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import React from "react";
+import { DEFAULT_COLOR } from "./Builder/BuilderConsts";
 
 interface Props {
   check: boolean;
@@ -51,7 +52,7 @@ export default function StyledCheckBox(props: Props): JSX.Element {
       }}
       check={check}
       css={customCss}
-      color={color || "#fb972e"}
+      color={color || DEFAULT_COLOR}
     >
       {check && <Icon src={"../icons/check.svg"} />}
     </Container>

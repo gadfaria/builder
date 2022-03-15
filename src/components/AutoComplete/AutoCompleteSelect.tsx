@@ -12,6 +12,7 @@ import { FaSortDown, FaSortUp } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import useClickOutside from "../../hooks/useClickOutside";
 import { getScrollParent } from "../../utils/DOMHelper";
+import { DEFAULT_COLOR } from "../Builder/BuilderConsts";
 import { AutoCompleteSelectItem } from "./AutoCompleteItem";
 
 export interface IOption {
@@ -76,15 +77,15 @@ const Input = styled.input<InputProps>`
     `}
 
   :focus {
-    box-shadow: 0px 0px 6px #fb972e4d;
-    border: 1px solid #fb972e;
+    box-shadow: 0px 0px 6px ${DEFAULT_COLOR + "4d"};
+    border: 1px solid ${DEFAULT_COLOR};
   }
 
   ${(props) =>
     props.active &&
     css`
-      box-shadow: 0px 0px 6px #fb972e4d;
-      border: 1px solid #fb972e;
+      box-shadow: 0px 0px 6px ${DEFAULT_COLOR + "4d"};
+      border: 1px solid ${DEFAULT_COLOR};
     `}
 
   &::placeholder {

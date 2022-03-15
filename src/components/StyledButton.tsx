@@ -7,6 +7,7 @@ import React, {
   PropsWithChildren,
 } from "react";
 import { notSelect } from "../utils/style";
+import { DEFAULT_COLOR } from "./Builder/BuilderConsts";
 
 export interface Props
   extends DetailedHTMLProps<
@@ -25,13 +26,13 @@ const InvertedColors = css`
 `;
 
 const NormalColors = css`
-  background-color: #fb972e;
-  border-color: #fb972e;
+  background-color: ${DEFAULT_COLOR};
+  border-color: ${DEFAULT_COLOR};
   color: white;
 `;
 
 const Button: any = styled.button`
-  border: 1px solid #fb972e;
+  border: 1px solid ${DEFAULT_COLOR};
   border-radius: 5px;
   display: flex;
   align-items: center;

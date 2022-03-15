@@ -9,9 +9,9 @@ import StarterKit from "@tiptap/starter-kit";
 import { useAtom } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
+import StyledCheckBox from "../StyledCheckBox";
 import { formBuilderCheckboxAtom } from "./Builder";
 import { Empty } from "./BuilderEditor";
-import StyledCheckBox from "../StyledCheckBox";
 
 const Container = styled.div`
   width: 100%;

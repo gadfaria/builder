@@ -21,6 +21,7 @@ import StyledInput from "../StyledInput";
 import StyledSelect from "../StyledSelect";
 import {
   DEFAULT_CHECKBOX_COLOR,
+  DEFAULT_COLOR,
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,
 } from "./BuilderConsts";
@@ -80,7 +81,7 @@ const BackgroundImage = styled.div<{ hasImage: boolean }>`
   height: 150px;
   position: relative;
   background: #fff2e5;
-  color: #fb972e;
+  color: ${DEFAULT_COLOR};
   border-radius: 4px;
   overflow: hidden;
   transition: opacity 0.3s;
@@ -88,7 +89,7 @@ const BackgroundImage = styled.div<{ hasImage: boolean }>`
   ${(props) =>
     !props.hasImage &&
     css`
-      border: 1px dashed #fb972e;
+      border: 1px dashed ${DEFAULT_COLOR};
       cursor: pointer;
       :hover {
         opacity: 0.7;
@@ -122,7 +123,7 @@ export const BackgroundImageIcons = styled.div`
   }
   :hover {
     svg {
-      color: #fb972e;
+      color: ${DEFAULT_COLOR};
       transition: color 0.3s;
     }
   }
@@ -139,7 +140,7 @@ const BackgroundText = styled.div`
   letter-spacing: 0px;
 
   svg {
-    color: #fb972e;
+    color: ${DEFAULT_COLOR};
     margin-right: 4px;
   }
 `;
@@ -729,7 +730,7 @@ export default function BuilderSidebar(props: Props) {
                   <Line />
                   <FormColorCard
                     label="Form color"
-                    color={item.state?.formColor || "#fb972e"}
+                    color={item.state?.formColor || DEFAULT_COLOR}
                     handleChangeColor={(color) => {
                       setItem({
                         ...item,

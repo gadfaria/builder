@@ -6,6 +6,7 @@ import React from "react";
 import ReactTooltip from "react-tooltip";
 import { customTooltip } from "../../utils/style";
 import { TooltipText, Types } from "./Builder";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 
 const Container = styled.div`
   /* z-index: 10; */
@@ -50,7 +51,7 @@ const Wrapper = styled.div<{ disabled: boolean }>`
 
 const IsDraggingCss = css`
   opacity: 1;
-  border-color: #fb972e;
+  border-color: ${DEFAULT_COLOR};
   background-color: #fff;
   :hover {
     opacity: 1;

@@ -17,6 +17,7 @@ import { SetStateAction } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
 import { ItemType } from "./Builder";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 import BuilderEditorMenuBar from "./BuilderEditorMenuBar";
 
 export const Container = styled(motion.div)<{ isSelected: boolean }>`
@@ -57,8 +58,8 @@ export const Empty = styled.div`
   justify-content: center;
   flex-direction: column;
   background: #fff2e5;
-  color: #fb972e;
-  border: 1px dashed #fb972e;
+  color: ${DEFAULT_COLOR};
+  border: 1px dashed ${DEFAULT_COLOR};
   border-radius: 8px;
   font-size: 18px;
   font-weight: 600;
