@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Flex, notSelect } from "../../utils/style";
 import StyledButton from "../StyledButton";
-import { formAtom, isThankYouAtom } from "./BuilderAtoms";
+import { builderAtom, isThankYouAtom } from "./BuilderAtoms";
 
 const TabContainer = styled.div`
   width: 270px;
@@ -136,7 +136,7 @@ const ButtonCss = css`
 
 export default function BuilderTopBar(): JSX.Element {
   const router = useRouter();
-  const [form] = useAtom(formAtom);
+  const [builder] = useAtom(builderAtom);
   const [isSaving, setIsSaving] = useState(false);
   const [isThankYou, setIsThankYou] = useAtom(isThankYouAtom);
   async function handleClickSave() {
@@ -171,7 +171,7 @@ export default function BuilderTopBar(): JSX.Element {
     setIsSaving(false);
   }
 
-  if (!form) return <></>;
+  if (!builder) return <></>;
   return (
     <Wrapper>
       <TitleContainer>
@@ -188,15 +188,15 @@ export default function BuilderTopBar(): JSX.Element {
           <div style={{ margin: "0px 8px 0px 10px" }}>
             {/* <Icon name="navigation-arrow-right" /> */}
           </div>
-          <TopBarTitle>{form.name}</TopBarTitle>
+          <TopBarTitle>{builder.name}</TopBarTitle>
         </Flex>
         <TopBarSubTitle>
           {/* <Icon name="fragment-icon" /> */}
           &nbsp;Builder • Created on{" "}
-          {dayjs(form.createdAt).format("MMM DD, YYYY @ h:MM a")}
+          {dayjs(builder.createdAt).format("MMM DD, YYYY @ h:MM a")}
         </TopBarSubTitle>
       </TitleContainer>
-      {form.hasThankYouBuilder && (
+      {builder.hasThankYouBuilder && (
         <AnimateSharedLayout>
           <TabContainer>
             <Tab key={"page"} animate onClick={() => setIsThankYou(false)}>

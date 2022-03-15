@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
 import StyledCheckBox from "../StyledCheckBox";
-import { formBuilderCheckboxAtom } from "./BuilderAtoms";
+import { builderCheckboxAtom } from "./BuilderAtoms";
 import { Empty } from "./BuilderEditor";
 
 const Container = styled.div`
@@ -50,7 +50,7 @@ const EditorContainer = styled.div<{ isPreview: boolean; isSelected: boolean }>`
 
 export default function BuilderCheckbox(props: any): JSX.Element {
   const { item, setItem, isPreview, isSelected } = props;
-  const [checkbox, setCheckbox] = useAtom(formBuilderCheckboxAtom);
+  const [checkbox, setCheckbox] = useAtom(builderCheckboxAtom);
 
   const editor = useEditor({
     extensions: [

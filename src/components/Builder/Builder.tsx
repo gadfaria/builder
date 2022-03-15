@@ -32,8 +32,8 @@ import ReactTooltip from "react-tooltip";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { customTooltip, TooltipText } from "../../utils/style";
 import {
-  formAtom,
-  formBuilderCheckboxAtom,
+  builderAtom,
+  builderCheckboxAtom,
   indexesAtom,
   isThankYouAtom,
   itemListAtom,
@@ -267,13 +267,12 @@ interface Props {
 }
 
 export default function Builder(props: Props) {
-  const router = useRouter();
   const [itemList, setItemsList] = useAtom(itemListAtom);
   const [indexes, setIndexes] = useAtom(indexesAtom);
   const [items, setItems] = useAtom(itemsAtom);
   const [selectedItem, setSelectedItem] = useAtom(selectedItemAtom);
-  const [, setCheckbox] = useAtom(formBuilderCheckboxAtom);
-  const [form, setForm] = useAtom(formAtom);
+  const [, setCheckbox] = useAtom(builderCheckboxAtom);
+  const [builder, setBuilder] = useAtom(builderAtom);
   const [isLoading, setIsLoading] = useState(true);
   const [overPosition, setOverPosition] = useState<{
     id: string;
@@ -299,14 +298,13 @@ export default function Builder(props: Props) {
         setItems([]);
         setIndexes([]);
         setIsThankYou(false);
-        //@ts-ignore
-        setForm(null);
+        setBuilder(null);
       }
     };
   }, []);
 
   useEffect(() => {
-    setForm(props.builder);
+    setBuilder(props.builder);
   }, [props.builder]);
 
   useEffect(() => {
@@ -314,7 +312,7 @@ export default function Builder(props: Props) {
     (async () => {
       setIsChanging(true);
 
-      let loadedItems = JSON.parse(
+      let loadedItems: ItemType[] = JSON.parse(
         (await localforage.getItem(
           isThankYou ? "thank-you-items" : "items"
         )) as string
@@ -337,7 +335,7 @@ export default function Builder(props: Props) {
       }
 
       if (loadedItems && loadedIndexes) {
-        const newItems = loadedItems.map((parsedItem: any) => {
+        const newItems = loadedItems.map((parsedItem) => {
           const { content } = checkType(parsedItem.type);
 
           return {
@@ -347,11 +345,8 @@ export default function Builder(props: Props) {
         });
 
         setItems(newItems);
-        // @ts-ignore
         setCheckbox(
-          newItems.findIndex(
-            (i: any) => i.type === "CHECKBOX" && !i.deleted
-          ) === -1
+          newItems.findIndex((i) => i.type === "CHECKBOX" && !i.deleted) === -1
         );
         setIndexes(loadedIndexes);
       } else {
@@ -368,8 +363,6 @@ export default function Builder(props: Props) {
   }, [isThankYou]);
 
   useEffect(() => {
-    // if (!alreadyLoaded.current) return;
-
     if (!alreadyLoadedItems.current) {
       alreadyLoadedItems.current = true;
       return;
@@ -382,8 +375,6 @@ export default function Builder(props: Props) {
   }, [items]);
 
   useEffect(() => {
-    // if (!alreadyLoaded.current) return;
-
     if (!alreadyLoadedIndexes.current) {
       alreadyLoadedIndexes.current = true;
       return;
@@ -396,7 +387,7 @@ export default function Builder(props: Props) {
   }, [indexes]);
 
   useEffect(() => {
-    if (!form) return;
+    if (!builder) return;
 
     if (props.isPreview) {
       (async () => {
@@ -421,7 +412,6 @@ export default function Builder(props: Props) {
           });
 
           setItems(newItems);
-          // @ts-ignore
           setCheckbox(
             newItems.findIndex((i) => i.type === "CHECKBOX" && !i.deleted) ===
               -1
@@ -434,16 +424,16 @@ export default function Builder(props: Props) {
         setIsLoading(false);
       })();
     } else {
-      const loadedItems = props.isThankYou
-        ? form.thankYouBuilder?.items
-        : form.builder?.items;
+      const loadedItems: ItemType[] = props.isThankYou
+        ? builder.thankYouBuilder?.items
+        : builder.builder?.items;
 
       const loadedIndexes = props.isThankYou
-        ? form.thankYouBuilder?.indexes
-        : form.builder?.indexes;
+        ? builder.thankYouBuilder?.indexes
+        : builder.builder?.indexes;
 
       if (loadedItems && loadedIndexes) {
-        const newItems = loadedItems.map((parsedItem: any) => {
+        const newItems = loadedItems.map((parsedItem) => {
           const { content } = checkType(parsedItem.type);
 
           return {
@@ -453,11 +443,8 @@ export default function Builder(props: Props) {
         });
 
         setItems(newItems);
-        // @ts-ignore
         setCheckbox(
-          newItems.findIndex(
-            (i: any) => i.type === "CHECKBOX" && !i.deleted
-          ) === -1
+          newItems.findIndex((i) => i.type === "CHECKBOX" && !i.deleted) === -1
         );
         setIndexes(loadedIndexes);
       } else {
@@ -473,7 +460,7 @@ export default function Builder(props: Props) {
 
       setIsLoading(false);
     }
-  }, [form]);
+  }, [builder]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -535,7 +522,6 @@ export default function Builder(props: Props) {
       ]);
 
       setIndexes([...indexes, items.length]);
-      //@ts-ignore
       setSelectedItem(1);
 
       return;
@@ -649,7 +635,7 @@ export default function Builder(props: Props) {
   useEffect(() => {
     if (
       isLoading ||
-      !form ||
+      !builder ||
       !props.isPreview ||
       (!isSafari && !isMobileSafari)
     )
@@ -659,9 +645,9 @@ export default function Builder(props: Props) {
     if (!node) return;
     document.body.removeChild(node);
     document.body.parentElement?.prepend(node);
-  }, [isLoading, form]);
+  }, [isLoading, builder]);
 
-  if (isLoading || !form) return <></>;
+  if (isLoading || !builder) return <></>;
   return (
     <>
       {!props.isPreview && <BuilderTopBar />}
@@ -738,7 +724,6 @@ export default function Builder(props: Props) {
               onClick={(e) => {
                 hideSideBars();
                 e.stopPropagation();
-                //@ts-ignore
                 setSelectedItem(0);
               }}
               key={0}
@@ -808,7 +793,6 @@ export default function Builder(props: Props) {
                         onClick={(e) => {
                           hideSideBars();
                           e.stopPropagation();
-                          //@ts-ignore
                           setSelectedItem(
                             items.findIndex(
                               (i) => i.type === "FOOTER" && !i.deleted

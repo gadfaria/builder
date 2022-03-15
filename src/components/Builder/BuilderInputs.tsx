@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { validationEmail } from "../../utils/Validation";
 import StyledButton from "../StyledButton";
 import StyledInput from "../StyledInput";
-import { formAtom, formBuilderCheckboxAtom } from "./BuilderAtoms";
+import { builderAtom, builderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import { ItemType } from "./BuilderTypes";
 
@@ -55,7 +55,6 @@ interface Props {
 }
 
 export default function BuilderInputs(props: Props): JSX.Element {
-  const [form] = useAtom(formAtom);
   const [email, setEmail] = useState("");
   const emailRef = useRef<HTMLInputElement>(null);
   const [firstName, setFirstName] = useState("");
@@ -63,7 +62,7 @@ export default function BuilderInputs(props: Props): JSX.Element {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [checkbox] = useAtom(formBuilderCheckboxAtom);
+  const [checkbox] = useAtom(builderCheckboxAtom);
   const [hasError, setHasError] = useState(false);
   const [inputPhoneCss, setInputPhoneCss] = useState<React.CSSProperties>({
     width: "340px",

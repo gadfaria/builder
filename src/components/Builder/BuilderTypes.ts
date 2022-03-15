@@ -3,7 +3,7 @@ import BuilderInputs from "./BuilderInputs";
 
 export type Types = "TEXT" | "IMAGE" | "FORM" | "MAIN" | "CHECKBOX" | "FOOTER";
 
-export interface IForm {
+export interface IBuilder {
   name: string;
   url: string;
   createdAt: Date;
