@@ -12,10 +12,7 @@ import {
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React from "react";
-
-const Wrapper = styled.div`
-  /* margin-bottom: 30px; */
-`;
+import { DEFAULT_COLOR } from "./BuilderConsts";
 
 const Label = styled.div`
   display: flex;
@@ -56,7 +53,7 @@ export default function BuilderInputRange(props: Props) {
             props.handleValueChange(value);
           }}
         >
-          <NumberInputField _focus={{ borderColor: "orange.50" }} />
+          <NumberInputField _focus={{ borderColor: DEFAULT_COLOR }} />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />
@@ -74,10 +71,10 @@ export default function BuilderInputRange(props: Props) {
           }}
         >
           <SliderTrack h="10px" borderRadius="8px" bg="#EEEEEE">
-            <SliderFilledTrack bg="orange.50" />
+            <SliderFilledTrack bg={DEFAULT_COLOR} />
           </SliderTrack>
           <SliderThumb
-            bg="orange.50"
+            bg={DEFAULT_COLOR}
             h="20px"
             w="20px"
             _focus={{ outline: "none" }}

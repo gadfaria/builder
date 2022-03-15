@@ -595,7 +595,7 @@ export default function BuilderSidebar(props: Props) {
             </AccordionItem>
           </Accordion>
 
-          <Accordion width="100%" allowMultiple>
+          <Accordion width="100%" allowMultiple >
             <AccordionItem>
               <AccordionButton
                 _focus={{ outline: "none" }}
