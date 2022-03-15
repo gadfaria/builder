@@ -8,6 +8,8 @@ import {
   Checkbox,
   CheckboxGroup,
   HStack,
+  Input,
+  Select,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -17,8 +19,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
 import StyledAutocompleteSelect from "../AutoComplete/AutoCompleteSelect";
-import StyledInput from "../StyledInput";
-import StyledSelect from "../StyledSelect";
 import { SideBarText } from "./Builder";
 import {
   DEFAULT_CHECKBOX_COLOR,
@@ -150,17 +150,17 @@ const Line = styled.div`
   margin: 20px 0px;
 `;
 
-const BORDER_STYLE_VALUES = [
-  { id: "none", value: "None", name: "None" },
-  { id: "hidden", value: "Hidden", name: "Hidden" },
-  { id: "dotted", value: "Dotted", name: "Dotted" },
-  { id: "dashed", value: "Dashed", name: "Dashed" },
-  { id: "solid", value: "Solid", name: "Solid" },
-  { id: "double", value: "Double", name: "Double" },
-  { id: "groove", value: "Groove", name: "Groove" },
-  { id: "ridge", value: "Ridge", name: "Ridge" },
-  { id: "inset", value: "Inset", name: "Inset" },
-  { id: "outset", value: "Outset", name: "Outset" },
+const BORDERS = [
+  "none",
+  "hidden",
+  "dotted",
+  "dashed",
+  "solid",
+  "double",
+  "groove",
+  "ridge",
+  "inset",
+  "outset",
 ];
 
 const FONTS = [
@@ -182,11 +182,8 @@ interface Props {
   itemAtom: PrimitiveAtom<ItemType>;
 }
 
-const BACKGROUND_OPTIONS = [
-  { id: "0", name: "None" },
-  { id: "1", name: "Image" },
-  { id: "2", name: "Color" },
-];
+const BACKGROUNDS = ["None", "Image", "Color"];
+
 export default function BuilderSidebar(props: Props) {
   const { itemAtom } = props;
 
@@ -194,12 +191,12 @@ export default function BuilderSidebar(props: Props) {
   const imageRef = useRef<HTMLInputElement>(null);
 
   const [autoWidth, setAutoWidth] = useState(!!!item.style?.width);
-  const [backgroundOptions, setBackgroundOptions] = useState(
+  const [selectedBackground, setSelectedBackground] = useState(
     item?.state?.image
-      ? BACKGROUND_OPTIONS[1]
+      ? "Image"
       : item?.style?.backgroundColor
-      ? BACKGROUND_OPTIONS[2]
-      : BACKGROUND_OPTIONS[0]
+      ? "Color"
+      : "None"
   );
 
   async function onFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -232,12 +229,12 @@ export default function BuilderSidebar(props: Props) {
   useEffect(() => {
     if (item.id !== "main") return;
 
-    setBackgroundOptions(
+    setSelectedBackground(
       item?.state?.image
-        ? BACKGROUND_OPTIONS[1]
+        ? "Image"
         : item?.style?.backgroundColor
-        ? BACKGROUND_OPTIONS[2]
-        : BACKGROUND_OPTIONS[0]
+        ? "Color"
+        : "None"
     );
   }, [item.id]);
 
@@ -252,7 +249,7 @@ export default function BuilderSidebar(props: Props) {
     });
   }
 
-  function handleChangeSelect(option: any) {
+  function handleChangeSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     setItem({
       ...item,
       state: {
@@ -265,7 +262,7 @@ export default function BuilderSidebar(props: Props) {
       },
     });
 
-    setBackgroundOptions(option);
+    setSelectedBackground(e.target.value);
   }
 
   const lineSpacing = parseFloat(
@@ -279,14 +276,20 @@ export default function BuilderSidebar(props: Props) {
           <SideBarText>FORM STYLE</SideBarText>
           <Wrapper>
             <Title>Background Type</Title>
-            <StyledSelect
-              options={BACKGROUND_OPTIONS}
-              selectedOption={backgroundOptions}
-              handleSelectedOption={handleChangeSelect}
-            />
+            <Select
+              focusBorderColor={DEFAULT_COLOR}
+              onChange={handleChangeSelect}
+              defaultValue={selectedBackground}
+            >
+              {BACKGROUNDS.map((background) => (
+                <option value={background}>
+                  {background.charAt(0).toUpperCase() + background.slice(1)}
+                </option>
+              ))}
+            </Select>
           </Wrapper>
 
-          {backgroundOptions.name === "Image" && (
+          {selectedBackground === "Image" && (
             <>
               <Wrapper>
                 <Title>Background Image</Title>
@@ -339,7 +342,7 @@ export default function BuilderSidebar(props: Props) {
               </Wrapper>
             </>
           )}
-          {backgroundOptions.name === "Color" && (
+          {selectedBackground === "Color" && (
             <Wrapper>
               <FormColorCard
                 isBackground
@@ -642,20 +645,23 @@ export default function BuilderSidebar(props: Props) {
 
                 <Line />
                 <Title>Border style</Title>
-                <StyledSelect
-                  options={BORDER_STYLE_VALUES}
-                  handleSelectedOption={(option: any) => {
+
+                <Select
+                  focusBorderColor={DEFAULT_COLOR}
+                  onChange={(e) =>
                     setItem({
                       ...item,
-                      style: { ...item.style, borderStyle: option.id },
-                    });
-                  }}
-                  selectedOption={
-                    BORDER_STYLE_VALUES.find(
-                      (option) => item.style?.borderStyle === option.id
-                    ) || BORDER_STYLE_VALUES[0]
+                      style: { ...item.style, borderStyle: e.target.value },
+                    })
                   }
-                />
+                  defaultValue={item.style?.borderStyle}
+                >
+                  {BORDERS.map((border) => (
+                    <option value={border}>
+                      {border.charAt(0).toUpperCase() + border.slice(1)}
+                    </option>
+                  ))}
+                </Select>
 
                 <Line />
 
@@ -687,8 +693,9 @@ export default function BuilderSidebar(props: Props) {
 
                 <AccordionPanel borderBottom="1px solid #EBEBEB">
                   <Title>Button Text</Title>
-                  <StyledInput
+                  <Input
                     value={item.state?.buttonText || "Get Started"}
+                    focusBorderColor={DEFAULT_COLOR}
                     onChange={(evt) => {
                       setItem({
                         ...item,
@@ -699,6 +706,7 @@ export default function BuilderSidebar(props: Props) {
                       });
                     }}
                   />
+
                   <Line />
                   <Title>Required Fields</Title>
                   <CheckboxGroup

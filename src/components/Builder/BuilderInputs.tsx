@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { Button } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { SetStateAction, useAtom } from "jotai";
@@ -9,7 +9,6 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
 import { toast } from "react-toastify";
 import { validationEmail } from "../../utils/Validation";
-import StyledInput from "../StyledInput";
 import { builderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import { ItemType } from "./BuilderTypes";
@@ -28,22 +27,16 @@ const Container = styled.div<{ isSelected?: boolean }>`
   }
 `;
 
-const InputCss = css`
-  margin-bottom: 12px;
-  width: 340px;
-  height: 46px;
-  font-size: 18px;
-
-  ::placeholder {
-    letter-spacing: 0px;
-    color: #979797;
-    font-size: 18px;
-  }
-`;
+const inputChakra = {
+  marginBottom: "12px",
+  width: 340,
+  height: 46,
+  fontSize: 18,
+};
 
 const buttonChakra = {
   width: 340,
-  heigh: 46,
+  height: 46,
   fontSize: 18,
   fontWeight: "bold",
   color: "white",
@@ -75,11 +68,8 @@ export default function BuilderInputs(props: Props): JSX.Element {
     color: "#383838",
     boxShadow: "none",
   });
-  // BOT DETECT
-  const [username, setUsername] = useState("");
 
   const disable =
-    username.length > 0 ||
     (checkbox !== null && !checkbox) ||
     email.length === 0 ||
     (props.item.state?.fields?.includes("FIRST_NAME") &&
@@ -143,9 +133,8 @@ export default function BuilderInputs(props: Props): JSX.Element {
     <Container
       isSelected={props.isSelected}
       css={css`
-        pointer-events: ${props.isPreview ? "auto" : "none"};
+        /* pointer-events: ${props.isPreview ? "auto" : "none"}; */
         input {
-          ${InputCss};
           ${props.item.state?.formColor &&
           css`
             :focus {
@@ -156,17 +145,10 @@ export default function BuilderInputs(props: Props): JSX.Element {
         }
       `}
     >
-      <div className="fake-input">
-        <input
-          autoComplete="off"
-          type="text"
-          name="username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-
       {props.item.state?.fields?.includes("FIRST_NAME") && (
-        <StyledInput
+        <Input
+          {...inputChakra}
+          focusBorderColor={props.item.state?.formColor || DEFAULT_COLOR}
           value={firstName}
           onChange={(evt) => setFirstName(evt.target.value)}
           placeholder="First Name"
@@ -174,7 +156,9 @@ export default function BuilderInputs(props: Props): JSX.Element {
       )}
 
       {props.item.state?.fields?.includes("LAST_NAME") && (
-        <StyledInput
+        <Input
+          {...inputChakra}
+          focusBorderColor={props.item.state?.formColor || DEFAULT_COLOR}
           value={lastName}
           onChange={(evt) => setLastName(evt.target.value)}
           placeholder="Last Name"
@@ -182,16 +166,19 @@ export default function BuilderInputs(props: Props): JSX.Element {
       )}
 
       {props.item.state?.fields?.includes("FULL_NAME") && (
-        <StyledInput
+        <Input
+          {...inputChakra}
+          focusBorderColor={props.item.state?.formColor || DEFAULT_COLOR}
           value={fullName}
           onChange={(evt) => setFullName(evt.target.value)}
           placeholder="Full Name"
         />
       )}
 
-      <StyledInput
+      <Input
+        {...inputChakra}
+        focusBorderColor={props.item.state?.formColor || DEFAULT_COLOR}
         value={email}
-        error={hasError}
         onChange={(evt) => {
           setHasError(false);
           setEmail(evt.target.value.split(" ").join("").trim());
@@ -206,6 +193,8 @@ export default function BuilderInputs(props: Props): JSX.Element {
         type="email"
         placeholder="Email"
         ref={emailRef}
+        isInvalid={hasError}
+        errorBorderColor="red.300"
       />
 
       {props.item.state?.fields?.includes("PHONE") && (
@@ -267,11 +256,10 @@ export default function BuilderInputs(props: Props): JSX.Element {
 
         <Button
           {...buttonChakra}
-          bgColor={
-            props.item.state?.formColor
-              ? props.item.state?.formColor
-              : DEFAULT_COLOR
-          }
+          bgColor={props.item.state?.formColor || DEFAULT_COLOR}
+          _hover={{
+            bgColor: (props.item.state?.formColor || DEFAULT_COLOR) + "80",
+          }}
           isLoading={isLoading}
           disabled={disable}
           onClick={handleClick}

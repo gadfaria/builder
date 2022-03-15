@@ -722,8 +722,8 @@ export default function Builder(props: Props) {
             <BuilderMain
               onClick={(e) => {
                 hideSideBars();
-                e.stopPropagation();
                 setSelectedItem(0);
+                e.stopPropagation();
               }}
               key={0}
               index={0}
@@ -843,9 +843,11 @@ export default function Builder(props: Props) {
                 bounce: false,
               }}
             >
-              {!props.isPreview && selectedItem && !!itemList[selectedItem] && (
-                <BuilderSidebar itemAtom={itemList[selectedItem]} />
-              )}
+              {!props.isPreview &&
+                selectedItem !== null &&
+                !!itemList[selectedItem] && (
+                  <BuilderSidebar itemAtom={itemList[selectedItem]} />
+                )}
             </Sidebar>
           )}
         </Container>

@@ -33,7 +33,7 @@ export const TooltipText = styled.span`
 
 export const buttonDimensionsChakra = {
   width: 100,
-  heigth: 42,
+  height: 42,
 };
 
 export const buttonOutlineChakra = {
