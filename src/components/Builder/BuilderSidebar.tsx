@@ -16,19 +16,20 @@ import { PrimitiveAtom, useAtom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
-import { ItemType, SideBarText } from "./Builder";
+import StyledAutocompleteSelect from "../AutoComplete/AutoCompleteSelect";
 import StyledInput from "../StyledInput";
 import StyledSelect from "../StyledSelect";
+import { SideBarText } from "./Builder";
 import {
   DEFAULT_CHECKBOX_COLOR,
   DEFAULT_COLOR,
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,
 } from "./BuilderConsts";
-import FormColorCard from "./ColorCard";
 import BuilderInputNumber from "./BuilderInputNumber";
 import BuilderInputRange from "./BuilderInputRange";
-import StyledAutocompleteSelect from "../AutoComplete/AutoCompleteSelect";
+import { ItemType } from "./BuilderTypes";
+import FormColorCard from "./ColorCard";
 
 const Container = styled.div`
   width: 100%;

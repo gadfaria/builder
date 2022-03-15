@@ -14,12 +14,13 @@ import {
   FaRegTrashAlt,
 } from "react-icons/fa";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
-import { indexesAtom, itemsAtom, ItemType, selectedItemAtom } from "./Builder";
+import { indexesAtom, itemsAtom, selectedItemAtom } from "./BuilderAtoms";
 import {
   DEFAULT_COLOR,
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,
 } from "./BuilderConsts";
+import { ItemType } from "./BuilderTypes";
 
 type ItemContainerProps = {
   isPreview: boolean;
@@ -89,7 +90,8 @@ export const ItemChildrenContainer = styled(
   background-color: transparent;
   border-radius: 10px;
   border: 2px solid ${DEFAULT_COLOR};
-  border-color: ${(props) => (props.isSelected ? DEFAULT_COLOR : "transparent")};
+  border-color: ${(props) =>
+    props.isSelected ? DEFAULT_COLOR : "transparent"};
   min-height: ${(props) =>
     props.isSelected ? (props.isText ? "135px" : "70px") : "auto"};
 `;

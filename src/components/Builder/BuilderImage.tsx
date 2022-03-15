@@ -6,9 +6,9 @@ import React, { SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiImageAlt } from "react-icons/bi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { ItemType } from "./Builder";
 import { Empty } from "./BuilderEditor";
 import { BackgroundImageIcons } from "./BuilderSidebar";
+import { ItemType } from "./BuilderTypes";
 interface Props {
   item: ItemType;
   setItem: (update: SetStateAction<ItemType>) => void;

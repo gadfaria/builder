@@ -4,9 +4,9 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import { customTooltip } from "../../utils/style";
-import { TooltipText, Types } from "./Builder";
+import { customTooltip, TooltipText } from "../../utils/style";
 import { DEFAULT_COLOR } from "./BuilderConsts";
+import { Types } from "./BuilderTypes";
 
 const Container = styled.div`
   /* z-index: 10; */

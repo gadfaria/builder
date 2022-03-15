@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
 import StyledCheckBox from "../StyledCheckBox";
-import { formBuilderCheckboxAtom } from "./Builder";
+import { formBuilderCheckboxAtom } from "./BuilderAtoms";
 import { Empty } from "./BuilderEditor";
 
 const Container = styled.div`

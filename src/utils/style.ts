@@ -22,3 +22,10 @@ export const Flex = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const TooltipText = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #ffffff;
+`;

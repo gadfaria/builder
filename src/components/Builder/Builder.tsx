@@ -18,7 +18,7 @@ import {
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import localforage from "localforage";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
@@ -30,7 +30,16 @@ import {
 } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { customTooltip } from "../../utils/style";
+import { customTooltip, TooltipText } from "../../utils/style";
+import {
+  formAtom,
+  formBuilderCheckboxAtom,
+  indexesAtom,
+  isThankYouAtom,
+  itemListAtom,
+  itemsAtom,
+  selectedItemAtom,
+} from "./BuilderAtoms";
 import BuilderCheckbox from "./BuilderCheckbox";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import BuilderEditor from "./BuilderEditor";
@@ -42,39 +51,7 @@ import BuilderMain from "./BuilderMain";
 import BuilderSidebar from "./BuilderSidebar";
 import BuilderSideBarCard from "./BuilderSideBarCard";
 import BuilderTopBar from "./BuilderTopBar";
-import { splitAtomWithFallback } from "./splitAtomWithFallback";
-
-export const TooltipText = styled.span`
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  color: #ffffff;
-`;
-
-export interface IForm {
-  _id?: string;
-  name: string;
-  nameType: FormNameType;
-  userUid: string;
-  submitted: number;
-  viewed: number;
-  url: string;
-  createdAt: Date;
-  formTagId: string;
-  isInternal?: boolean;
-  externalUsers: string[];
-  description?: string;
-  builder?: any;
-  hasBuilder?: boolean;
-  thankYouBuilder?: any;
-  hasThankYouBuilder?: boolean;
-}
-
-export enum FormNameType {
-  FIRST_NAME = "FIRST_NAME",
-  FULL_NAME = "FULL_NAME",
-  NO_NAME = "NO_NAME",
-}
+import { ItemType, Types } from "./BuilderTypes";
 
 const Container = styled.div<{ isPreview: boolean }>`
   display: grid;
@@ -215,8 +192,6 @@ const EmptyDescription = styled.div`
   margin-top: 7px;
 `;
 
-export type Types = "TEXT" | "IMAGE" | "FORM" | "MAIN" | "CHECKBOX" | "FOOTER";
-
 const TYPES: { label: string; type: Types; icon: string }[] = [
   {
     label: "Text",
@@ -246,58 +221,6 @@ const TYPES: { label: string; type: Types; icon: string }[] = [
 ];
 
 const THANK_YOU_TYPES = ["TEXT", "IMAGE", "FOOTER"];
-export interface ItemType {
-  id: string;
-  type: Types;
-  content?: typeof BuilderInputs | typeof BuilderEditor;
-  style?: {
-    fontFamily?: string;
-    color?: string;
-    padding?: string;
-    margin?: string;
-    backgroundColor?: string;
-    borderColor?: string;
-    borderWidth?: string;
-    borderStyle?: string;
-    checkbox?: boolean;
-    fontSize?: string;
-    width?: string;
-    opacity?: string;
-    borderRadius?: string;
-    lineHeight?: string;
-    paddingLeft?: string;
-    paddingRight?: string;
-    paddingTop?: string;
-    paddingBottom?: string;
-    marginLeft?: string;
-    marginRight?: string;
-    marginTop?: string;
-    marginBottom?: string;
-    linkColor?: string;
-    visitedLinkColor?: string;
-    checkboxColor?: string;
-  };
-  state?: any;
-  deleted?: boolean;
-}
-
-type Unsubscribe = () => void;
-
-type Storage<Value> = {
-  getItem: (key: string) => Value | Promise<Value>;
-  setItem: (key: string, newValue: Value) => void | Promise<void>;
-  delayInit?: boolean;
-  subscribe?: (key: string, callback: (value: Value) => void) => Unsubscribe;
-};
-
-export const indexesAtom = atom<number[]>([]);
-export const itemsAtom = atom<ItemType[]>([]);
-
-export const itemListAtom = splitAtomWithFallback(itemsAtom);
-export const formAtom = atom<IForm | null>(null);
-export const selectedItemAtom = atom<number | null>(0);
-export const formBuilderCheckboxAtom = atom<boolean | null>(null);
-export const isThankYouAtom = atom<boolean>(false);
 
 function cleanUpStorage() {
   localforage.clear();

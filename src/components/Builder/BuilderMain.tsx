@@ -9,7 +9,7 @@ import React, {
   useCallback,
 } from "react";
 import { useDropzone } from "react-dropzone";
-import { ItemType } from "./Builder";
+import { ItemType } from "./BuilderTypes";
 
 const Container = styled.div<{ isPreview: boolean }>`
   width: 100%;

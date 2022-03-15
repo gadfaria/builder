@@ -17,7 +17,6 @@ import React, { MouseEventHandler, useCallback, useRef } from "react";
 import { isMobile, isMobileSafari } from "react-device-detect";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { debounce } from "../../hooks/useDebounce";
-import { indexesAtom, itemListAtom } from "./Builder";
 import {
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,
@@ -29,6 +28,7 @@ import {
   ItemRelative,
 } from "./BuilderItem";
 import BuilderEditorMenuBar from "./BuilderEditorMenuBar";
+import { indexesAtom, itemListAtom } from "./BuilderAtoms";
 
 interface Props {
   isPreview: boolean;

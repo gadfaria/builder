@@ -6,11 +6,12 @@ import React, { useEffect, useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
 import { toast } from "react-toastify";
-import StyledButton from "../StyledButton";
-import { formAtom, formBuilderCheckboxAtom, ItemType } from "./Builder";
 import { validationEmail } from "../../utils/Validation";
+import StyledButton from "../StyledButton";
 import StyledInput from "../StyledInput";
+import { formAtom, formBuilderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
+import { ItemType } from "./BuilderTypes";
 
 const Container = styled.div<{ isSelected?: boolean }>`
   padding: ${(props) => (props.isSelected ? "10px" : "0px")};

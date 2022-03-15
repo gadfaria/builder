@@ -16,9 +16,9 @@ import { motion } from "framer-motion";
 import { SetStateAction } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
-import { ItemType } from "./Builder";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import BuilderEditorMenuBar from "./BuilderEditorMenuBar";
+import { ItemType } from "./BuilderTypes";
 
 export const Container = styled(motion.div)<{ isSelected: boolean }>`
   height: 100%;

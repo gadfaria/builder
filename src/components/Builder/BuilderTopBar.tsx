@@ -9,8 +9,8 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Flex, notSelect } from "../../utils/style";
-import { formAtom, isThankYouAtom } from "./Builder";
 import StyledButton from "../StyledButton";
+import { formAtom, isThankYouAtom } from "./BuilderAtoms";
 
 const TabContainer = styled.div`
   width: 270px;
