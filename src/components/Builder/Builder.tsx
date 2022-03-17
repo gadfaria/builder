@@ -51,7 +51,7 @@ import BuilderMain from "./BuilderMain";
 import BuilderSidebar from "./BuilderSidebar";
 import BuilderSideBarCard from "./BuilderSideBarCard";
 import BuilderTopBar from "./BuilderTopBar";
-import { ItemType, Types } from "./BuilderTypes";
+import { IBuilder, ItemType, Types } from "./BuilderTypes";
 
 const Container = styled.div<{ isPreview: boolean }>`
   display: grid;
@@ -266,9 +266,10 @@ const variantsLeft = {
 };
 
 interface Props {
-  builder: any;
+  builder: IBuilder;
   isPreview: boolean;
   isThankYou: boolean;
+  onSave: (builder: any) => void;
 }
 
 export default function Builder(props: Props) {
@@ -660,7 +661,11 @@ export default function Builder(props: Props) {
   if (isLoading || !builder) return <></>;
   return (
     <>
-      {!props.isPreview && <BuilderTopBar />}
+      {!props.isPreview && (
+        <BuilderTopBar
+          onSave={props.onSave}
+        />
+      )}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -745,10 +750,10 @@ export default function Builder(props: Props) {
               {!items.find((i) => i.type === "FOOTER" && !i.deleted) &&
               indexes.length === 1 ? (
                 <Empty>
-                  <img src="./images/empty-builder.svg" />
-                  <EmptyText>Form Builder</EmptyText>
+                  <img src="../images/empty-builder.svg" />
+                  <EmptyText>Page Builder</EmptyText>
                   <EmptyDescription>
-                    Select or drag and drop a form element here to get started.
+                    Select or drag and drop a element here to get started.
                   </EmptyDescription>
                 </Empty>
               ) : (

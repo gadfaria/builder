@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="101" height="140.41" viewBox="0 0 101 140.41">
+  <g id="Illustration" transform="translate(-851 -344)">
+    <g id="Form" transform="translate(851 344)">
+      <path id="Path_10357" data-name="Path 10357" d="M11.429,0H63.176c6.312,0,21.111,15.775,21.111,22.087V100a11.429,11.429,0,0,1-11.429,11.429H11.429A11.429,11.429,0,0,1,0,100V11.429A11.429,11.429,0,0,1,11.429,0Z" transform="translate(1.428 1.429)" fill="#fff"/>
+      <path id="Path_10352" data-name="Path 10352" d="M87.078,57.481V19.516a9.979,9.979,0,0,0-2.942-7.1L74.665,2.942A9.979,9.979,0,0,0,67.562,0h-57.5A10.057,10.057,0,0,0,.018,10.045v94.2a10.057,10.057,0,0,0,10.045,10.045H77.033a10.057,10.057,0,0,0,10.045-10.045V57.481ZM66.988,6.7a3.655,3.655,0,0,1,2.942.981L79.4,17.149a3.655,3.655,0,0,1,.981,2.942H66.988Zm13.394,97.552a3.352,3.352,0,0,1-3.348,3.348l-67.969,1a3.352,3.352,0,0,1-3.348-3.348V9.045A3.352,3.352,0,0,1,9.063,5.7H61.29V22.439a3.349,3.349,0,0,0,3.348,3.348H80.381s.1,21.84,0,38.4,0,17.308,0,27.324,0,4.57,0,12.741Z" transform="translate(-0.018 0)" fill="#fb972e"/>
+    </g>
+    <g id="Rectangle_1840" data-name="Rectangle 1840" transform="translate(866.714 399.409)" fill="#fff2e5" stroke="#fb972e" stroke-linejoin="round" stroke-width="5" stroke-dasharray="8 2">
+      <rect width="57.143" height="42.857" stroke="none"/>
+      <rect x="2.5" y="2.5" width="52.143" height="37.857" fill="none"/>
+    </g>
+    <rect id="Rectangle_1842" data-name="Rectangle 1842" width="57.143" height="5.714" rx="2" transform="translate(866.714 376.552)" fill="#fb972e"/>
+    <rect id="Rectangle_1843" data-name="Rectangle 1843" width="57.143" height="5.714" rx="2" transform="translate(866.714 386.552)" fill="#fb972e"/>
+    <g id="Rectangle_1841" data-name="Rectangle 1841" transform="translate(888.143 425.124)" fill="#fff" stroke="#fb972e" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+      <rect width="57.143" height="42.857" stroke="none"/>
+      <rect x="2.5" y="2.5" width="52.143" height="37.857" fill="none"/>
+    </g>
+    <g id="Group_10843" data-name="Group 10843" transform="translate(925.286 442.267)">
+      <path id="Path_10376" data-name="Path 10376" d="M865.91,527.075l23.5,22.686H878.645l5.993,13.611-5.993,1.81L873.55,552.5l-7.64,6.4Z" transform="translate(-864.61 -525.539)" fill="#fff"/>
+      <path id="cursor" d="M14.527,41.143a1.286,1.286,0,0,1-1.184-.787l-4.81-11.4L2.815,34.012a1.615,1.615,0,0,1-1.116.423A1.7,1.7,0,0,1,0,32.729V1.706A1.7,1.7,0,0,1,1.7,0,1.747,1.747,0,0,1,2.8.4L25.229,23.141a1.846,1.846,0,0,1,.485,1.2,1.705,1.705,0,0,1-1.7,1.706H16.4l4.636,10.994a1.285,1.285,0,0,1-.672,1.678l-5.323,2.314A1.3,1.3,0,0,1,14.527,41.143Zm-5.5-15.619a1.254,1.254,0,0,1,.286.033,1.283,1.283,0,0,1,.9.754l5,11.849,2.964-1.289L13.277,25.264a1.285,1.285,0,0,1,1.185-1.785h7.5L2.571,3.818V30.8l5.6-4.952A1.287,1.287,0,0,1,9.022,25.524ZM1.149,32.057a.989.989,0,0,0-.1.087ZM23.3,24.84h0Zm0,0" transform="translate(0)" fill="#fb972e" stroke="#fb972e" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

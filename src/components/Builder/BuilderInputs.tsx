@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, useToast } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { SetStateAction, useAtom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { toast } from "react-toastify";
 import { validationEmail } from "../../utils/Validation";
 import { builderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
@@ -50,6 +49,7 @@ interface Props {
 }
 
 export default function BuilderInputs(props: Props): JSX.Element {
+  const toast = useToast();
   const [email, setEmail] = useState("");
   const emailRef = useRef<HTMLInputElement>(null);
   const [firstName, setFirstName] = useState("");
@@ -84,22 +84,37 @@ export default function BuilderInputs(props: Props): JSX.Element {
     if (email.includes("+")) {
       setHasError(true);
       setIsLoading(false);
-      toast(
-        "Test does not allow the '+keyword' based alias emails. Instead of entering troy+test@troybroussard.com you will need to enter troy@troybroussard.com as the email address. For CAN-SPAM reasons we cannot alter the email you enter, so you'll need to re-enter it.",
-        { type: "error" }
-      );
+      toast({
+        title: "Invalid email.",
+        description:
+          "Our software does not allow the '+keyword' based alias emails. Instead of entering troy+test@troybroussard.com you will need to enter troy@troybroussard.com as the email address. For CAN-SPAM reasons we cannot alter the email you enter, so you'll need to re-enter it.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return;
     }
 
     if (!validationEmail(email)) {
       setHasError(true);
       setIsLoading(false);
-      toast("Incorrect email format", { type: "error" });
+
+      toast({
+        title: "Incorrect email format.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return;
     }
 
     if (props.item.state?.fields?.includes("PHONE") && phone.length <= 7) {
-      toast("Incorrect phone", { type: "error" });
+      toast({
+        title: "Incorrect phone.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       setInputPhoneCss((i) => ({
         ...i,
         borderColor: "#c41700",
@@ -112,7 +127,12 @@ export default function BuilderInputs(props: Props): JSX.Element {
     const response = false;
 
     if (!response) {
-      toast("Failed to add your contact", { type: "error" });
+      toast({
+        title: "Failed to add your contact.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
 
     setIsLoading(false);

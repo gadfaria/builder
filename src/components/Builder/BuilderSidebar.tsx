@@ -800,8 +800,9 @@ export default function BuilderSidebar(props: Props) {
                   <InputGroup size="sm">
                     <InputLeftAddon children="https://" />
                     <Input
-                      value={item.state?.url}
+                      value={item.state?.url?.replace("https://", "")}
                       placeholder="site"
+                      focusBorderColor={DEFAULT_COLOR}
                       onChange={(e) =>
                         setItem({
                           ...item,
@@ -812,7 +813,6 @@ export default function BuilderSidebar(props: Props) {
                         })
                       }
                     />
-                    <InputRightAddon children=".com" />
                   </InputGroup>
                 </AccordionPanel>
               </AccordionItem>

@@ -1,15 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { Button } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import { useAtom } from "jotai";
 import localforage from "localforage";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
-import { toast } from "react-toastify";
 import {
   buttonDimensionsChakra,
   buttonOutlineChakra,
@@ -18,6 +16,7 @@ import {
   notSelect,
 } from "../../utils/style";
 import { builderAtom, isThankYouAtom } from "./BuilderAtoms";
+import { IBuilder } from "./BuilderTypes";
 
 const TabContainer = styled.div`
   width: 270px;
@@ -148,8 +147,12 @@ const IconDiv = styled.div`
   justify-content: center;
 `;
 
-export default function BuilderTopBar(): JSX.Element {
-  const router = useRouter();
+interface Props {
+  onSave: (builder: IBuilder) => void;
+}
+
+export default function BuilderTopBar(props: Props): JSX.Element {
+  const toast = useToast();
   const [builder] = useAtom(builderAtom);
   const [isSaving, setIsSaving] = useState(false);
   const [isThankYou, setIsThankYou] = useAtom(isThankYouAtom);
@@ -172,16 +175,35 @@ export default function BuilderTopBar(): JSX.Element {
     );
 
     if (!itemsFromLocalForage && !thankYouItemsFromLocalForage) {
-      toast("Save", { type: "success" });
+      toast({
+        title: "Saved.",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
       setIsSaving(false);
       return;
     }
 
-    const response = false;
+    const builderToSave = {
+      ...builder,
+      ...(itemsFromLocalForage &&
+        indexesFromLocalForage && {
+          builder: {
+            items: itemsFromLocalForage,
+            indexes: indexesFromLocalForage,
+          },
+        }),
+      ...(thankYouItemsFromLocalForage &&
+        thankYouIndexesFromLocalForage && {
+          thankYouBuilder: {
+            items: thankYouItemsFromLocalForage,
+            indexes: thankYouIndexesFromLocalForage,
+          },
+        }),
+    };
 
-    if (response) {
-      toast("Save", { type: "success" });
-    }
+    props.onSave(builderToSave);
 
     setTimeout(() => {
       setIsSaving(false);
@@ -198,7 +220,6 @@ export default function BuilderTopBar(): JSX.Element {
               color: #707070;
               cursor: pointer;
             `}
-            onClick={() => router.back()}
           >
             Builder
           </TopBarTitle>
