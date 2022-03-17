@@ -48,6 +48,7 @@ import BuilderImage from "./BuilderImage";
 import BuilderInputs from "./BuilderInputs";
 import BuilderItem from "./BuilderItem";
 import BuilderMain from "./BuilderMain";
+import SeoHead from "./BuilderSeoHead";
 import BuilderSidebar from "./BuilderSidebar";
 import BuilderSideBarCard from "./BuilderSideBarCard";
 import BuilderTopBar from "./BuilderTopBar";
@@ -661,11 +662,8 @@ export default function Builder(props: Props) {
   if (isLoading || !builder) return <></>;
   return (
     <>
-      {!props.isPreview && (
-        <BuilderTopBar
-          onSave={props.onSave}
-        />
-      )}
+      <SeoHead pageName={builder.pageTitle || "Builder"} />
+      {!props.isPreview && <BuilderTopBar onSave={props.onSave} />}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}

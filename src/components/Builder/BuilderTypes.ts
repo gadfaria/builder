@@ -12,6 +12,7 @@ export type Types =
 
 export interface IBuilder {
   name: string;
+  pageTitle?: string;
   url: string;
   createdAt: Date;
   builder?: any;
