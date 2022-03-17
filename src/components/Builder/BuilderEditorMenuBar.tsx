@@ -1,4 +1,18 @@
 /** @jsxImportSource @emotion/react */
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ChainedCommands, Editor } from "@tiptap/react";
@@ -16,6 +30,11 @@ import {
   FaUnderline,
   FaUnlink,
 } from "react-icons/fa";
+import {
+  buttonDimensionsChakra,
+  buttonOutlineChakra,
+  buttonSolidChakra,
+} from "../../utils/style";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 
 interface Props {
@@ -40,7 +59,7 @@ const Wrapper = styled.div`
   font-family: Arial, Helvetica, sans-serif !important;
 `;
 
-const Button = styled.div<{ isActive?: boolean }>`
+const StyledButton = styled.div<{ isActive?: boolean }>`
   border: none;
   padding: 10px;
   margin: 0px 5px;
@@ -86,7 +105,7 @@ const ButtonsWrapperModal = styled.div`
 
 export default function BuilderEditorMenuBar(props: Props) {
   const linkURL = useRef<string>("");
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   if (!props.editor || !props.containerRef) {
     return null;
   }
@@ -108,7 +127,7 @@ export default function BuilderEditorMenuBar(props: Props) {
 
     if (props.editor.isActive("heading", { level: 1 }))
       return (
-        <Button
+        <StyledButton
           onClick={() => {
             let chain = props.editor.chain().toggleHeading({ level: 2 });
             editorChainKeepAlign(props.editor, chain);
@@ -119,12 +138,12 @@ export default function BuilderEditorMenuBar(props: Props) {
           <div style={{ color: "#fff" }}>
             <FaHeading />1
           </div>
-        </Button>
+        </StyledButton>
       );
 
     if (props.editor.isActive("heading", { level: 2 }))
       return (
-        <Button
+        <StyledButton
           onClick={() => {
             let chain = props.editor.chain().toggleHeading({ level: 3 });
             editorChainKeepAlign(props.editor, chain);
@@ -135,12 +154,12 @@ export default function BuilderEditorMenuBar(props: Props) {
           <div style={{ color: "#fff" }}>
             <FaHeading />2
           </div>
-        </Button>
+        </StyledButton>
       );
 
     if (props.editor.isActive("heading", { level: 3 }))
       return (
-        <Button
+        <StyledButton
           onClick={() => {
             let chain = props.editor.chain().toggleHeading({ level: 3 });
             editorChainKeepAlign(props.editor, chain);
@@ -151,13 +170,13 @@ export default function BuilderEditorMenuBar(props: Props) {
           <div style={{ color: "#fff" }}>
             <FaHeading />3
           </div>
-        </Button>
+        </StyledButton>
       );
 
     // Toggle the third one back to paragraph
     if (noHeading)
       return (
-        <Button
+        <StyledButton
           onClick={() => {
             let chain = props.editor.chain().toggleHeading({ level: 1 });
             editorChainKeepAlign(props.editor, chain);
@@ -167,154 +186,174 @@ export default function BuilderEditorMenuBar(props: Props) {
           <div style={{ color: "#fff" }}>
             <FaHeading />
           </div>
-        </Button>
+        </StyledButton>
       );
   }
 
   function getCurrentAlignment() {
     if (props.editor.isActive({ textAlign: "center" })) {
       return (
-        <Button
+        <StyledButton
           onClick={() => props.editor.chain().setTextAlign("right").run()}
           isActive={props.editor.isActive({ textAlign: "center" })}
         >
           <div style={{ color: "#fff" }}>
             <FaAlignCenter />
           </div>
-        </Button>
+        </StyledButton>
       );
     }
     if (props.editor.isActive({ textAlign: "right" })) {
       return (
-        <Button
+        <StyledButton
           onClick={() => props.editor.chain().setTextAlign("justify").run()}
           isActive={props.editor.isActive({ textAlign: "right" })}
         >
           <div style={{ color: "#fff" }}>
             <FaAlignRight />
           </div>
-        </Button>
+        </StyledButton>
       );
     }
 
     if (props.editor.isActive({ textAlign: "justify" })) {
       return (
-        <Button
+        <StyledButton
           onClick={() => props.editor.chain().setTextAlign("left").run()}
           isActive={props.editor.isActive({ textAlign: "justify" })}
         >
           <div style={{ color: "#fff" }}>
             <FaAlignJustify />
           </div>
-        </Button>
+        </StyledButton>
       );
     }
 
     return (
-      <Button
+      <StyledButton
         onClick={() => props.editor.chain().setTextAlign("center").run()}
         isActive={true}
       >
         <div style={{ color: "#fff" }}>
           <FaAlignLeft />
         </div>
-      </Button>
+      </StyledButton>
     );
   }
 
   return (
     <Container>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add link</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <InputGroup>
+              <InputLeftAddon children="https://" />
+              <Input
+                focusBorderColor={DEFAULT_COLOR}
+                placeholder="Enter link"
+                onChange={(e) =>
+                  (linkURL.current = "https://" + e.target.value)
+                }
+              />
+            </InputGroup>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              {...buttonOutlineChakra}
+              {...buttonDimensionsChakra}
+              mr={3}
+              onClick={onClose}
+            >
+              Close
+            </Button>
+            <Button
+              {...buttonSolidChakra}
+              {...buttonDimensionsChakra}
+              onClick={() => {
+                props.editor
+                  .chain()
+                  .focus()
+                  .setLink({ href: linkURL.current, target: "_blank" })
+                  .run();
+                onClose();
+                // const url = window.prompt("URL");
+                // if (!url) return;
+                // props.editor
+                //   .chain()
+                //   .focus()
+                //   .setLink({ href: url, target: "_blank" })
+                //   .run();
+              }}
+            >
+              Add
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <Wrapper>
-        <Button
+        <StyledButton
           onClick={() => props.editor.chain().focus().toggleBold().run()}
           isActive={props.editor.isActive("bold")}
         >
           <div style={{ color: "#fff" }}>
             <FaBold />
           </div>
-        </Button>
-        <Button
+        </StyledButton>
+        <StyledButton
           onClick={() => props.editor.chain().focus().toggleItalic().run()}
           isActive={props.editor.isActive("italic")}
         >
           <div style={{ color: "#fff" }}>
             <FaItalic />
           </div>
-        </Button>
-        <Button
+        </StyledButton>
+        <StyledButton
           onClick={() => props.editor.chain().focus().toggleStrike().run()}
           isActive={props.editor.isActive("strike")}
         >
           <div style={{ color: "#fff" }}>
             <FaStrikethrough />
           </div>
-        </Button>
+        </StyledButton>
 
-        <Button
+        <StyledButton
           onClick={() => props.editor.chain().focus().toggleUnderline().run()}
           isActive={props.editor.isActive("underline")}
         >
           <div style={{ color: "#fff" }}>
             <FaUnderline />
           </div>
-        </Button>
+        </StyledButton>
         {getCurrentHeading()}
         {getCurrentAlignment()}
 
         {/* Links */}
         {!props.editor.isActive("link") ? (
-          <Button
+          <StyledButton
             onClick={() => {
               linkURL.current = "";
-              // modal.pushModal(
-              //   <ModalContainer>
-              //     <StyledInput
-              //       placeholder="Enter link"
-              //       onChange={(e) => (linkURL.current = e.target.value)}
-              //     />
-              //     <ButtonsWrapperModal>
-              //       <StyledButton onClick={() => modal.popModal()} inverted>
-              //         Cancel
-              //       </StyledButton>
-              //       <StyledButton
-              //         onClick={() => {
-              //           props.editor
-              //             .chain()
-              //             .focus()
-              //             .setLink({ href: linkURL.current, target: "_blank" })
-              //             .run();
-              //           modal.popModal();
-              //         }}
-              //       >
-              //         Add
-              //       </StyledButton>
-              //     </ButtonsWrapperModal>
-              //   </ModalContainer>,
-              //   "Add link"
-              // );
-              // const url = window.prompt("URL");
-              // if (!url) return;
-              // props.editor
-              //   .chain()
-              //   .focus()
-              //   .setLink({ href: url, target: "_blank" })
-              //   .run();
+              onOpen();
             }}
             isActive={props.editor.isActive("link")}
           >
             <div style={{ color: "#fff" }}>
               <FaLink />
             </div>
-          </Button>
+          </StyledButton>
         ) : (
-          <Button
+          <StyledButton
             onClick={() => props.editor.chain().focus().unsetLink().run()}
             isActive={props.editor.isActive("link")}
           >
             <div style={{ color: "#fff" }}>
               <FaUnlink />
             </div>
-          </Button>
+          </StyledButton>
         )}
       </Wrapper>
     </Container>

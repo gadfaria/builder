@@ -800,12 +800,15 @@ export default function BuilderSidebar(props: Props) {
                   <InputGroup size="sm">
                     <InputLeftAddon children="https://" />
                     <Input
-                      value={item.state.url}
+                      value={item.state?.url}
                       placeholder="site"
                       onChange={(e) =>
                         setItem({
                           ...item,
-                          state: { ...item.state, url: e.target.value },
+                          state: {
+                            ...item.state,
+                            url: "https://" + e.target.value,
+                          },
                         })
                       }
                     />
