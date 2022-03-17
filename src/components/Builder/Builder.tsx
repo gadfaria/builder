@@ -622,8 +622,11 @@ export default function Builder(props: Props) {
 
     if (!over) return;
 
-    let activeY = (active.rect.current.translated as any)?.offsetTop;
-    let middleOfOver = (over.rect as any).offsetTop + over.rect.height / 2;
+    // let activeY =active.rect.current.translated?.offsetTop;
+    // let middleOfOver =over.rect.offsetTop + over.rect.height / 2;
+
+    let activeY = active.rect.current.translated?.top;
+    let middleOfOver = over.rect.top + over.rect.height / 2;
 
     if (!activeY) return;
     if (activeY > middleOfOver) {
