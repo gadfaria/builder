@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { Checkbox } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import FontFamily from "@tiptap/extension-font-family";
@@ -9,8 +10,8 @@ import StarterKit from "@tiptap/starter-kit";
 import { useAtom } from "jotai";
 import React, { useCallback, useRef } from "react";
 import { debounce } from "../../hooks/useDebounce";
-import StyledCheckBox from "../StyledCheckBox";
 import { builderCheckboxAtom } from "./BuilderAtoms";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 import { Empty } from "./BuilderEditor";
 
 const Container = styled.div`
@@ -113,11 +114,12 @@ export default function BuilderCheckbox(props: any): JSX.Element {
               }
             `}
           >
-            <StyledCheckBox
-              check={!!checkbox}
-              color={item.style?.checkboxColor}
-              // @ts-ignore
-              handleCheck={() => setCheckbox(!checkbox)}
+            <Checkbox
+              size="md"
+              color={DEFAULT_COLOR}
+              borderColor="#2e2e2e80"
+              checked={!!checkbox}
+              onChange={() => setCheckbox(!!!checkbox)}
             />
           </div>
           <EditorContainer

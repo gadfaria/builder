@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { IBuilder, ItemType } from "./BuilderTypes";
-import { splitAtomWithFallback } from "./splitAtomWithFallback";
+import { splitAtomWithFallback } from "../../utils/splitAtomWithFallback";
 
 export const indexesAtom = atom<number[]>([]);
 export const itemsAtom = atom<ItemType[]>([]);

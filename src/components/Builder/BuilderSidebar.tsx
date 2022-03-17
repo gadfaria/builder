@@ -276,7 +276,7 @@ export default function BuilderSidebar(props: Props) {
     <Container>
       {item.id === "main" ? (
         <>
-          <SideBarText>FORM STYLE</SideBarText>
+          <SideBarText>BUILDER STYLE</SideBarText>
           <Wrapper>
             <Title>Background Type</Title>
             <Select

@@ -29,7 +29,6 @@ import {
 } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { customTooltip, TooltipText } from "../../utils/style";
 import {
   builderAtom,
   builderCheckboxAtom,
@@ -51,10 +50,12 @@ import BuilderMain from "./BuilderMain";
 import SeoHead from "./BuilderSeoHead";
 import BuilderSidebar from "./BuilderSidebar";
 import BuilderSideBarCard from "./BuilderSideBarCard";
+import { builderStyle, customTooltip, TooltipText } from "./BuilderStyle";
 import BuilderTopBar from "./BuilderTopBar";
 import { IBuilder, ItemType, Types } from "./BuilderTypes";
 
 const Container = styled.div<{ isPreview: boolean }>`
+  ${builderStyle}
   display: grid;
   max-width: 100vw;
   width: 100%;

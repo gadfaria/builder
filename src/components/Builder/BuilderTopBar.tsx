@@ -1,5 +1,19 @@
 /** @jsxImportSource @emotion/react */
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
@@ -7,6 +21,7 @@ import { AnimateSharedLayout, motion } from "framer-motion";
 import { useAtom } from "jotai";
 import localforage from "localforage";
 import React, { useState } from "react";
+import { BsGear } from "react-icons/bs";
 import { FiChevronRight } from "react-icons/fi";
 import {
   buttonDimensionsChakra,
@@ -14,9 +29,26 @@ import {
   buttonSolidChakra,
   Flex,
   notSelect,
-} from "../../utils/style";
+} from "./BuilderStyle";
 import { builderAtom, isThankYouAtom } from "./BuilderAtoms";
+import { DEFAULT_COLOR } from "./BuilderConsts";
 import { IBuilder } from "./BuilderTypes";
+import BuilderConfigModal from "./BuilderConfigModal";
+
+const GearIconDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+
+  svg {
+    cursor: pointer;
+    transition: color 0.3s;
+    :hover {
+      color: ${DEFAULT_COLOR};
+    }
+  }
+`;
 
 const TabContainer = styled.div`
   width: 270px;
@@ -153,9 +185,10 @@ interface Props {
 
 export default function BuilderTopBar(props: Props): JSX.Element {
   const toast = useToast();
-  const [builder] = useAtom(builderAtom);
+  const [builder, setBuilder] = useAtom(builderAtom);
   const [isSaving, setIsSaving] = useState(false);
   const [isThankYou, setIsThankYou] = useAtom(isThankYouAtom);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   async function handleClickSave() {
     setIsSaving(true);
@@ -213,12 +246,19 @@ export default function BuilderTopBar(props: Props): JSX.Element {
   if (!builder) return <></>;
   return (
     <Wrapper>
+      <BuilderConfigModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSave={(builder) => {
+          setBuilder(builder);
+          onClose();
+        }}
+      />
       <TitleContainer>
         <Flex>
           <TopBarTitle
             css={css`
               color: #707070;
-              cursor: pointer;
             `}
           >
             Builder
@@ -268,7 +308,11 @@ export default function BuilderTopBar(props: Props): JSX.Element {
           </TabContainer>
         </AnimateSharedLayout>
       )}
+
       <ButtonsContainer>
+        <GearIconDiv onClick={onOpen}>
+          <BsGear size="1.5em" />
+        </GearIconDiv>
         <Button
           {...buttonDimensionsChakra}
           {...buttonOutlineChakra}

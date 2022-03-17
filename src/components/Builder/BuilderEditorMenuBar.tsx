@@ -34,7 +34,7 @@ import {
   buttonDimensionsChakra,
   buttonOutlineChakra,
   buttonSolidChakra,
-} from "../../utils/style";
+} from "./BuilderStyle";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 
 interface Props {

@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import { customTooltip, TooltipText } from "../../utils/style";
+import { customTooltip, TooltipText } from "./BuilderStyle";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import { Types } from "./BuilderTypes";
 
