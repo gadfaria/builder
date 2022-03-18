@@ -10,9 +10,9 @@ import React, {
 } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import useClickOutside from "../../hooks/useClickOutside";
-import { getScrollParent } from "../../utils/DOMHelper";
-import { DEFAULT_COLOR } from "../Builder/BuilderConsts";
+import useClickOutside from "../hooks/useClickOutside";
+import { getScrollParent } from "../utils/DOMHelper";
+import { DEFAULT_COLOR } from "../BuilderConsts";
 import { AutoCompleteSelectItem } from "./AutoCompleteItem";
 
 export interface IOption {

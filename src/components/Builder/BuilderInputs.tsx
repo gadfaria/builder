@@ -7,7 +7,7 @@ import { SetStateAction, useAtom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { validationEmail } from "../../utils/Validation";
+import { validationEmail } from "./utils/Validation";
 import { builderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import { ItemType } from "./BuilderTypes";

@@ -15,7 +15,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import { SetStateAction } from "jotai";
 import React, { useCallback, useRef } from "react";
-import { debounce } from "../../hooks/useDebounce";
+import { debounce } from "./hooks/useDebounce";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import BuilderEditorMenuBar from "./BuilderEditorMenuBar";
 import { ItemType } from "./BuilderTypes";

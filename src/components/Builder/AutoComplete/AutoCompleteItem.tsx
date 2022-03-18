@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { CSSProperties } from "react";
 import { FaCheck } from "react-icons/fa";
-import { DEFAULT_COLOR } from "../Builder/BuilderConsts";
+import { DEFAULT_COLOR } from "../BuilderConsts";
 
 interface IListItemContainer {
   isHover: boolean;

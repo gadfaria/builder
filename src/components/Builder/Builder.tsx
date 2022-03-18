@@ -28,7 +28,7 @@ import {
   BsLayoutTextSidebarReverse,
 } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
-import useMediaQuery from "../../hooks/useMediaQuery";
+import useMediaQuery from "./hooks/useMediaQuery";
 import {
   builderAtom,
   builderCheckboxAtom,

@@ -9,7 +9,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useAtom } from "jotai";
 import React, { useCallback, useRef } from "react";
-import { debounce } from "../../hooks/useDebounce";
+import { debounce } from "./hooks/useDebounce";
 import { builderCheckboxAtom } from "./BuilderAtoms";
 import { DEFAULT_COLOR } from "./BuilderConsts";
 import { Empty } from "./BuilderEditor";

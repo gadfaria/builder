@@ -21,7 +21,7 @@ import { PrimitiveAtom, useAtom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
-import StyledAutocompleteSelect from "../AutoComplete/AutoCompleteSelect";
+import StyledAutocompleteSelect from "./AutoComplete/AutoCompleteSelect";
 import { SideBarText } from "./Builder";
 import BuilderColorCard from "./BuilderColorCard";
 import {

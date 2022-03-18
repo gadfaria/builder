@@ -16,7 +16,7 @@ import { useUpdateAtom } from "jotai/utils";
 import React, { MouseEventHandler, useCallback, useRef } from "react";
 import { isMobile, isMobileSafari } from "react-device-detect";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { debounce } from "../../hooks/useDebounce";
+import { debounce } from "./hooks/useDebounce";
 import {
   DEFAULT_COLOR_LINK,
   DEFAULT_VISITED_COLOR_LINK,

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { SketchPicker } from "react-color";
 import { IoMdClose } from "react-icons/io";
-import useClickOutside from "../../hooks/useClickOutside";
+import useClickOutside from "./hooks/useClickOutside";
 const Wrapper = styled.div`
   width: 100%;
   height: 36px;
