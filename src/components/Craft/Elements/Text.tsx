@@ -16,11 +16,11 @@ import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import InputNumber from "../components/InputNumber";
-import { DEFAULT_COLOR } from "../utils/consts";
 import { debounce } from "../hooks/useDebounce";
+import { DEFAULT_COLOR } from "../utils/consts";
 import MenuBar from "./MenuBar";
 
-export const Container = styled(motion.div)<{ isSelected: boolean }>`
+const Container = styled(motion.div)<{ isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -49,7 +49,7 @@ export const Container = styled(motion.div)<{ isSelected: boolean }>`
     `};
 `;
 
-export const Empty = styled.div`
+const Empty = styled.div`
   width: 100%;
   height: 70px;
   display: flex;

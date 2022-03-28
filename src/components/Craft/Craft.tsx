@@ -4,13 +4,12 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import { builderStyle } from "../Builder/BuilderStyle";
-import TopBar from "./TopBar/TopBar";
 import { Button } from "./Elements/Button";
+import { Container } from "./Elements/Container";
+import { Text } from "./Elements/Text";
 import LeftSidebar from "./LeftSidebar/LeftSidebar";
 import { RightSidebar } from "./RightSidebar/RightSidebar";
-import { Card, CardBottom, CardTop } from "./user/Card";
-import { Container } from "./user/Container";
-import { Text } from "./Elements/Text";
+import TopBar from "./TopBar/TopBar";
 
 const Wrapper = styled.div<{ isPreview: boolean }>`
   ${builderStyle}
@@ -41,12 +40,9 @@ export default function Craft() {
     <>
       <Editor
         resolver={{
-          Card,
           Button,
           Text,
           Container,
-          CardTop,
-          CardBottom,
         }}
       >
         <TopBar onSave={() => {}} />
@@ -60,24 +56,7 @@ export default function Craft() {
               padding={5}
               background="#eeeeee"
               data-cy="root-container"
-            >
-              <Card data-cy="frame-card" />
-              <Button text="Click aaa" size="small" data-cy="frame-button" />
-              <Text fontSize={20} text="Hi world!" data-cy="frame-text" />
-              <Element
-                canvas
-                is={Container}
-                padding={6}
-                background="#999999"
-                data-cy="frame-container"
-              >
-                <Text
-                  size="small"
-                  text="It's me again!"
-                  data-cy="frame-container-text"
-                />
-              </Element>
-            </Element>
+            ></Element>
           </Frame>
           <RightSidebar />
           {/* <Grid item xs={4}>
