@@ -16,6 +16,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { debounce } from "../hooks/useDebounce";
+import BackgroundColor from "../RightSidebar/BackgroundColor";
 import BorderSettings from "../RightSidebar/BorderSettings";
 import FontSettings from "../RightSidebar/FontSettings";
 import MarginSettings from "../RightSidebar/MarginSettings";
@@ -88,6 +89,7 @@ interface Props {
   borderRadius: number;
   borderStyle: string;
   borderColor: string;
+  backgroundColor: string;
 }
 
 export const Text = ({
@@ -108,6 +110,7 @@ export const Text = ({
   borderRadius,
   borderStyle,
   borderColor,
+  backgroundColor,
 }: Props) => {
   const {
     connectors: { connect, drag },
@@ -211,12 +214,12 @@ export const Text = ({
         color: ${fontColor};
         font-family: ${fontFamily};
         margin: ${marginTop}% ${marginRight}% ${marginBottom}% ${marginLeft}%;
-        padding: ${paddingTop}% ${paddingRight}% ${paddingBottom}%
-          ${paddingLeft}%;
-        border-width: ${borderWidth}%;
+        padding: ${paddingTop}% ${paddingRight}% ${paddingBottom}% ${paddingLeft}%;
+        border-width: ${borderWidth}px;
         border-radius: ${borderRadius}%;
         border-color: ${borderColor};
         border-style: ${borderStyle};
+        background-color: ${backgroundColor};
       `}
     >
       {!editable && editor.isEmpty ? (
@@ -257,10 +260,17 @@ const TextSettings = () => {
     borderRadius: node.data.props.borderRadius,
     borderStyle: node.data.props.borderStyle,
     borderColor: node.data.props.borderColor,
+    backgroundColor: node.data.props.backgroundColor,
   }));
 
   return (
     <SettingsContainer>
+      <BackgroundColor
+        backgroundColor={props.backgroundColor}
+        setValue={(value: string | undefined, key: string) => {
+          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+        }}
+      />
       <MarginSettings
         {...props}
         setValue={(value: string | number, key: string) => {
