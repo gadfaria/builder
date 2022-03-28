@@ -30,12 +30,12 @@ import {
   FaUnderline,
   FaUnlink,
 } from "react-icons/fa";
-import { DEFAULT_COLOR } from "../utils/consts";
+import { DEFAULT_COLOR } from "../../utils/consts";
 import {
   buttonOutlineChakra,
   buttonDimensionsChakra,
   buttonSolidChakra,
-} from "../utils/style";
+} from "../../utils/style";
 
 interface Props {
   editor: Editor;

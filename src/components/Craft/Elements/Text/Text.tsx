@@ -15,14 +15,14 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { debounce } from "../hooks/useDebounce";
-import BackgroundColor from "../RightSidebar/BackgroundColor";
-import BorderSettings from "../RightSidebar/BorderSettings";
-import FontSettings from "../RightSidebar/FontSettings";
-import MarginSettings from "../RightSidebar/MarginSettings";
-import PaddingSettings from "../RightSidebar/PaddingSettings";
-import { SettingsContainer } from "../RightSidebar/RightSidebar";
-import { DEFAULT_COLOR } from "../utils/consts";
+import { debounce } from "../../hooks/useDebounce";
+import BackgroundColor from "../../RightSidebar/BackgroundColor";
+import BorderSettings from "../../RightSidebar/BorderSettings";
+import FontSettings from "../../RightSidebar/FontSettings";
+import MarginSettings from "../../RightSidebar/MarginSettings";
+import PaddingSettings from "../../RightSidebar/PaddingSettings";
+import { SettingsContainer } from "../../RightSidebar/RightSidebar";
+import { DEFAULT_COLOR } from "../../utils/consts";
 import MenuBar from "./MenuBar";
 
 const Container = styled(motion.div)<{ isSelected: boolean }>`
