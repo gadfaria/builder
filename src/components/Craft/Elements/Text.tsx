@@ -89,7 +89,7 @@ interface Props {
   borderRadius: number;
   borderStyle: string;
   borderColor: string;
-  backgroundColor: string;
+  backgroundColor?: string;
 }
 
 export const Text = ({
