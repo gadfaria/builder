@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
-import { DEFAULT_COLOR } from "../consts";
+import { DEFAULT_COLOR } from "../utils/consts";
 
 const Wrapper = styled.div`
   width: 100%;

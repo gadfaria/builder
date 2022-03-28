@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import { builderStyle } from "../Builder/BuilderStyle";
-import CraftTopBar from "./CraftTopBar";
+import TopBar from "./TopBar/TopBar";
 import { Button } from "./Elements/Button";
 import LeftSidebar from "./LeftSidebar/LeftSidebar";
 import { RightSidebar } from "./RightSidebar/RightSidebar";
@@ -49,7 +49,7 @@ export default function Craft() {
           CardBottom,
         }}
       >
-        <CraftTopBar onSave={() => {}} />
+        <TopBar onSave={() => {}} />
 
         <Wrapper isPreview={false}>
           <LeftSidebar />

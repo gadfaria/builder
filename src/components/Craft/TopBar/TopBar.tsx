@@ -6,13 +6,13 @@ import dayjs from "dayjs";
 import React, { useState } from "react";
 import { FaRedo, FaUndo } from "react-icons/fa";
 import { FiChevronRight } from "react-icons/fi";
-import { IBuilder } from "./types";
+import { IBuilder } from "../utils/types";
 import {
   buttonDimensionsChakra,
   buttonOutlineChakra,
   buttonSolidChakra,
   Flex,
-} from "./style";
+} from "../utils/style";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -65,7 +65,7 @@ interface Props {
   onSave: (builder: IBuilder) => void;
 }
 
-export default function CraftTopBar(props: Props): JSX.Element {
+export default function TopBar(props: Props): JSX.Element {
   const toast = useToast();
   const [isSaving, setIsSaving] = useState(false);
 

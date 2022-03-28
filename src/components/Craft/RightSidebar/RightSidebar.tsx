@@ -2,7 +2,7 @@ import { Button, Center, Flex, Spacer } from "@chakra-ui/react";
 import { useEditor } from "@craftjs/core";
 import styled from "@emotion/styled";
 import React from "react";
-import { buttonErrorSolidChakra } from "../style";
+import { buttonErrorSolidChakra } from "../utils/style";
 
 export const SideBarText = styled.div`
   font-size: 14px;

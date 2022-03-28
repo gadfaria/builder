@@ -16,7 +16,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import InputNumber from "../components/InputNumber";
-import { DEFAULT_COLOR } from "../consts";
+import { DEFAULT_COLOR } from "../utils/consts";
 import { debounce } from "../hooks/useDebounce";
 import MenuBar from "./MenuBar";
 
