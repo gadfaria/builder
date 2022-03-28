@@ -8,6 +8,7 @@ import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
 import { Button } from "../Elements/Button";
 import { Container } from "../Elements/Container/Container";
+import { Image } from "../Elements/Image";
 import { Text, TextDefaultProps } from "../Elements/Text/Text";
 import useClickOutside from "../hooks/useClickOutside";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -50,22 +51,18 @@ const SideBarButton = styled.div`
   }
 `;
 
-const Sidebar = styled(motion.div)<{ right?: boolean }>`
+const Sidebar = styled(motion.div)`
   width: 100%;
   max-width: 300px;
-  height: calc(100vh - 81px);
+  height: 100%;
   background-color: #fff;
   z-index: 2;
+  border-right: 1px solid rgba(0, 0, 0, 0.16);
+  position: relative;
 
   @media (max-width: 1680px) {
     position: absolute;
     bottom: 0;
-
-    ${(props) =>
-      props.right &&
-      css`
-        right: 0;
-      `}
   }
 `;
 
@@ -104,6 +101,12 @@ const TYPES: Type[] = [
     type: "BUTTON",
     icon: "../icons/builder/text.svg",
     component: <Button />,
+  },
+  {
+    label: "Image",
+    type: "IMAGE",
+    icon: "../icons/builder/image.svg",
+    component: <Image />,
   },
   {
     label: "Column",
@@ -169,10 +172,6 @@ export default function LeftSidebar() {
 
       <Sidebar
         ref={sidebarRef}
-        css={css`
-          border-right: 1px solid rgba(0, 0, 0, 0.16);
-          position: relative;
-        `}
         animate={isLargerThan1680 || showLeftSideBar ? "open" : "closed"}
         variants={variants}
         transition={{

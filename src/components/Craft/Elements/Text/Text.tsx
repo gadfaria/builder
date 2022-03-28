@@ -186,7 +186,8 @@ export const Text = ({
     debounce(() => {
       if (editor) {
         setProp(
-          (prop: Record<string, any>) => (prop.text = editor?.getHTML())
+          (prop: Record<string, any>) => (prop.text = editor?.getHTML()),
+          1000
         );
       }
     }, 500),
@@ -238,7 +239,7 @@ export const Text = ({
   );
 };
 
-const TextSettings = () => {
+const Settings = () => {
   const {
     actions: { setProp },
     ...props
@@ -325,6 +326,6 @@ export const TextDefaultProps = {
 Text.craft = {
   props: TextDefaultProps,
   related: {
-    settings: TextSettings,
+    settings: Settings,
   },
 };

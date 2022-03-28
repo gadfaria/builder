@@ -34,6 +34,37 @@ export const craftStyle = css`
   *::-webkit-scrollbar-thumb:hover {
     background-color: rgba(168, 168, 168, 0.7);
   }
+
+  @tailwind base;
+  @tailwind components;
+  @import url("https://use.typekit.net/mpa1wkh.css");
+  @tailwind utilities;
+
+  .component-selected {
+    @apply relative;
+  }
+  .component-selected::after {
+    content: " ";
+    @apply border-primary border border-dashed w-full h-full absolute left-0 top-0 pointer-events-none block;
+  }
+
+  .transition {
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  #carbonads * {
+    margin: initial;
+    padding: initial;
+  }
+
+  #carbonads {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
+      sans-serif;
+
+    padding: 10px 0.5rem;
+    border-top: 1px solid rgb(0 0 0 / 6%);
+  }
 `;
 
 export const notSelect = css`

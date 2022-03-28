@@ -1,6 +1,7 @@
 import { Button, Center, Flex, Spacer } from "@chakra-ui/react";
 import { useEditor } from "@craftjs/core";
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import React from "react";
 import { buttonErrorSolidChakra } from "../utils/style";
 
@@ -45,6 +46,22 @@ export const SettingsContainer = styled.div`
   }
 `;
 
+const Sidebar = styled(motion.div)`
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 2;
+  border-left: 1px solid rgba(0, 0, 0, 0.16);
+  position: relative;
+
+  @media (max-width: 1680px) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+`;
+
 export const RightSidebar = () => {
   const { actions, selected, isEnabled } = useEditor((state, query) => {
     const currentNodeId = query.getEvent("selected").last();
@@ -68,7 +85,7 @@ export const RightSidebar = () => {
   });
 
   return isEnabled && selected ? (
-    <div>
+    <Sidebar>
       <Flex m={25}>
         <SideBarText>BUILDER STYLE</SideBarText>
         <Spacer />
@@ -89,7 +106,7 @@ export const RightSidebar = () => {
           </Button>
         </Center>
       )}
-    </div>
+    </Sidebar>
   ) : (
     <></>
   );

@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import { useNode, useEditor } from "@craftjs/core";
+import { useEditor, useNode } from "@craftjs/core";
 import styled from "@emotion/styled";
 import cx from "classnames";
 import { debounce } from "debounce";
 import { Resizable } from "re-resizable";
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
-  isPercentage,
-  pxToPercent,
-  percentToPx,
   getElementDimensions,
+  isPercentage,
+  percentToPx,
+  pxToPercent,
 } from "../../utils/numToMeasurement";
 
 const Indicators = styled.div`

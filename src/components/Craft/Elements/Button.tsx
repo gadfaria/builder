@@ -25,7 +25,7 @@ export const Button = ({ size, variant, color, text, ...props }: any) => {
   );
 };
 
-export const ButtonSettings = () => {
+export const Settings = () => {
   const {
     actions: { setProp },
     props,
@@ -63,6 +63,6 @@ export const ButtonDefaultProps = {
 Button.craft = {
   props: ButtonDefaultProps,
   related: {
-    settings: ButtonSettings,
+    settings: Settings,
   },
 };
