@@ -53,18 +53,12 @@ export default function Craft() {
             <Element
               canvas
               is={Container}
-              padding={5}
-              background="#eeeeee"
-              data-cy="root-container"
+              width="800px"
+              height="auto"
+              custom={{ displayName: "App" }}
             />
           </Frame>
           <RightSidebar />
-          {/* <Grid item xs={4}>
-            <Paper className={classes.root}>
-              <Toolbox />
-              <SettingsPanel />
-            </Paper>
-          </Grid> */}
         </Wrapper>
       </Editor>
     </>

@@ -1,18 +1,20 @@
 /** @jsxImportSource @emotion/react */
+import { Element } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
-import { Types } from "../utils/types";
-import { DEFAULT_COLOR } from "../utils/consts";
-import { customTooltip, TooltipText } from "../utils/style";
+import { Button } from "../Elements/Button";
+import { Container } from "../Elements/Container";
+import { Text, TextDefaultProps } from "../Elements/Text";
 import useClickOutside from "../hooks/useClickOutside";
 import useMediaQuery from "../hooks/useMediaQuery";
-import { Text, TextDefaultProps } from "../Elements/Text";
+import { DEFAULT_COLOR } from "../utils/consts";
+import { customTooltip, TooltipText } from "../utils/style";
+import { Types } from "../utils/types";
 import LeftSidebarCard from "./LeftSidebarCard";
-import { Button } from "../Elements/Button";
 
 const SideBarButton = styled.div`
   display: flex;
@@ -95,13 +97,32 @@ const TYPES: Type[] = [
     label: "Text",
     type: "TEXT",
     icon: "../icons/builder/text.svg",
-    component: <Text {...TextDefaultProps}/>,
+    component: <Text {...TextDefaultProps} />,
   },
   {
     label: "Button",
     type: "BUTTON",
     icon: "../icons/builder/text.svg",
     component: <Button />,
+  },
+  {
+    label: "Column",
+    type: "COLUMN",
+    icon: "../icons/builder/text.svg",
+    component: (
+      <Element
+        canvas
+        is={Container}
+        flexDirection="row"
+        width="100%"
+        height="auto"
+        paddingBottom={40}
+        paddingLeft={40}
+        paddingRight={40}
+        paddingTop={40}
+        custom={{ displayName: "Introduction" }}
+      />
+    ),
   },
 ];
 

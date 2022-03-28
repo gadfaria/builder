@@ -186,7 +186,7 @@ export const Text = ({
     debounce(() => {
       if (editor) {
         setProp(
-          (props: Record<string, any>) => (props.text = editor?.getHTML())
+          (prop: Record<string, any>) => (prop.text = editor?.getHTML())
         );
       }
     }, 500),
@@ -268,34 +268,34 @@ const TextSettings = () => {
       <BackgroundColor
         backgroundColor={props.backgroundColor}
         setValue={(value: string | undefined, key: string) => {
-          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
       <MarginSettings
         {...props}
         setValue={(value: string | number, key: string) => {
-          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
 
       <PaddingSettings
         {...props}
         setValue={(value: string | number, key: string) => {
-          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
 
       <BorderSettings
         {...props}
         setValue={(value: string | number, key: string) => {
-          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
 
       <FontSettings
         {...props}
         setValue={(value: string | number, key: string) => {
-          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
     </SettingsContainer>
