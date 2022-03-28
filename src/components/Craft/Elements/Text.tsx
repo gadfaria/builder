@@ -15,8 +15,12 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import InputNumber from "../components/InputNumber";
 import { debounce } from "../hooks/useDebounce";
+import BorderSettings from "../RightSidebar/BorderSettings";
+import FontSettings from "../RightSidebar/FontSettings";
+import MarginSettings from "../RightSidebar/MarginSettings";
+import PaddingSettings from "../RightSidebar/PaddingSettings";
+import { SettingsContainer } from "../RightSidebar/RightSidebar";
 import { DEFAULT_COLOR } from "../utils/consts";
 import MenuBar from "./MenuBar";
 
@@ -66,7 +70,45 @@ const Empty = styled.div`
   font-family: Arial, Helvetica, sans-serif !important;
 `;
 
-export const Text = ({ text, fontSize }: any) => {
+interface Props {
+  text: string;
+  fontSize: number;
+  fontColor: string;
+  lineSpacing: number;
+  fontFamily: string;
+  marginTop: number;
+  marginBottom: number;
+  marginLeft: number;
+  marginRight: number;
+  paddingTop: number;
+  paddingBottom: number;
+  paddingLeft: number;
+  paddingRight: number;
+  borderWidth: number;
+  borderRadius: number;
+  borderStyle: string;
+  borderColor: string;
+}
+
+export const Text = ({
+  text,
+  fontSize,
+  lineSpacing,
+  fontColor,
+  fontFamily,
+  marginTop,
+  marginBottom,
+  marginLeft,
+  marginRight,
+  paddingTop,
+  paddingBottom,
+  paddingLeft,
+  paddingRight,
+  borderWidth,
+  borderRadius,
+  borderStyle,
+  borderColor,
+}: Props) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -155,6 +197,8 @@ export const Text = ({ text, fontSize }: any) => {
     setEditable(false);
   }, [selected]);
 
+  console.log({ borderWidth, borderRadius, borderColor, borderStyle });
+
   if (!editor) return <></>;
   return (
     <Container
@@ -163,6 +207,16 @@ export const Text = ({ text, fontSize }: any) => {
       isSelected={selected}
       css={css`
         font-size: ${fontSize}px;
+        line-height: ${lineSpacing}em;
+        color: ${fontColor};
+        font-family: ${fontFamily};
+        margin: ${marginTop}% ${marginRight}% ${marginBottom}% ${marginLeft}%;
+        padding: ${paddingTop}% ${paddingRight}% ${paddingBottom}%
+          ${paddingLeft}%;
+        border-width: ${borderWidth}%;
+        border-radius: ${borderRadius}%;
+        border-color: ${borderColor};
+        border-style: ${borderStyle};
       `}
     >
       {!editable && editor.isEmpty ? (
@@ -184,28 +238,78 @@ export const Text = ({ text, fontSize }: any) => {
 const TextSettings = () => {
   const {
     actions: { setProp },
-    fontSize,
+    ...props
   } = useNode((node) => ({
     text: node.data.props.text,
     fontSize: node.data.props.fontSize,
+    fontColor: node.data.props.fontColor,
+    lineSpacing: node.data.props.lineSpacing,
+    fontFamily: node.data.props.fontFamily,
+    marginTop: node.data.props.marginTop,
+    marginBottom: node.data.props.marginBottom,
+    marginLeft: node.data.props.marginLeft,
+    marginRight: node.data.props.marginRight,
+    paddingTop: node.data.props.paddingTop,
+    paddingBottom: node.data.props.paddingBottom,
+    paddingLeft: node.data.props.paddingLeft,
+    paddingRight: node.data.props.paddingRight,
+    borderWidth: node.data.props.borderWidth,
+    borderRadius: node.data.props.borderRadius,
+    borderStyle: node.data.props.borderStyle,
+    borderColor: node.data.props.borderColor,
   }));
 
   return (
-    <>
-      <InputNumber
-        label="Font Size"
-        value={fontSize || 14}
-        handleValueChange={(vle) =>
-          setProp((props: Record<string, any>) => (props.fontSize = vle), 1000)
-        }
+    <SettingsContainer>
+      <MarginSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+        }}
       />
-    </>
+
+      <PaddingSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+        }}
+      />
+
+      <BorderSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+        }}
+      />
+
+      <FontSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((props: Record<string, any>) => (props[key] = value), 1000);
+        }}
+      />
+    </SettingsContainer>
   );
 };
 
 export const TextDefaultProps = {
   text: "",
   fontSize: 14,
+  fontColor: "#1A202C",
+  lineSpacing: 1,
+  fontFamily: "Source Sans Pro",
+  marginTop: 0,
+  marginBottom: 0,
+  marginLeft: 0,
+  marginRight: 0,
+  paddingTop: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+  paddingRight: 0,
+  borderWidth: 0,
+  borderRadius: 0,
+  borderStyle: "none",
+  borderColor: "#e2e8f0",
 };
 
 Text.craft = {

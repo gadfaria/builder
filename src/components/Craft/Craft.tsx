@@ -56,7 +56,7 @@ export default function Craft() {
               padding={5}
               background="#eeeeee"
               data-cy="root-container"
-            ></Element>
+            />
           </Frame>
           <RightSidebar />
           {/* <Grid item xs={4}>

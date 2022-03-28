@@ -11,6 +11,40 @@ export const SideBarText = styled.div`
   font-weight: 600;
 `;
 
+export const SettingsContainer = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  .accordion-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .title-button {
+    font-size: 16px;
+    font-weight: 600;
+    color: #3e3e3e;
+  }
+`;
+
 export const RightSidebar = () => {
   const { actions, selected, isEnabled } = useEditor((state, query) => {
     const currentNodeId = query.getEvent("selected").last();
@@ -57,41 +91,6 @@ export const RightSidebar = () => {
       )}
     </div>
   ) : (
-    // <Box bgcolor="rgba(0, 0, 0, 0.06)" mt={2} px={2} py={2}>
-    //   <Grid container direction="column" spacing={0}>
-    //     <Grid item>
-    //       <Box pb={2}>
-    //         <Grid container alignItems="center">
-    //           <Grid item xs>
-    //             <Typography variant="subtitle1">Selected</Typography>
-    //           </Grid>
-    //           <Grid item>
-    //             <Chip
-    //               size="small"
-    //               color="primary"
-    //               label={selected.name}
-    //               data-cy="chip-selected"
-    //             />
-    //           </Grid>
-    //         </Grid>
-    //       </Box>
-    //     </Grid>
-    // <div data-cy="settings-panel">
-    //   {selected.settings && React.createElement(selected.settings)}
-    // </div>
-    // {selected.isDeletable ? (
-    //   <MaterialButton
-    //     variant="contained"
-    //     color="default"
-    //     onClick={() => {
-    //       actions.delete(selected.id);
-    //     }}
-    //   >
-    //     Delete
-    //   </MaterialButton>
-    // ) : null}
-    //   </Grid>
-    // </Box>
     <></>
   );
 };

@@ -10,7 +10,7 @@ import { DEFAULT_COLOR } from "../utils/consts";
 import { customTooltip, TooltipText } from "../utils/style";
 import useClickOutside from "../hooks/useClickOutside";
 import useMediaQuery from "../hooks/useMediaQuery";
-import { Text } from "../Elements/Text";
+import { Text, TextDefaultProps } from "../Elements/Text";
 import LeftSidebarCard from "./LeftSidebarCard";
 import { Button } from "../Elements/Button";
 
@@ -95,7 +95,7 @@ const TYPES: Type[] = [
     label: "Text",
     type: "TEXT",
     icon: "../icons/builder/text.svg",
-    component: <Text />,
+    component: <Text {...TextDefaultProps}/>,
   },
   {
     label: "Button",
