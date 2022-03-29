@@ -9,7 +9,7 @@ import ReactTooltip from "react-tooltip";
 import { Button } from "../Elements/Button";
 import { Container } from "../Elements/Container/Container";
 import { Image } from "../Elements/Image";
-import { Text, TextDefaultProps } from "../Elements/Text/Text";
+import { Text, defaultTextProps } from "../Elements/Text/Text";
 import useClickOutside from "../hooks/useClickOutside";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { DEFAULT_COLOR } from "../utils/consts";
@@ -94,7 +94,7 @@ const TYPES: Type[] = [
     label: "Text",
     type: "TEXT",
     icon: "../icons/builder/text.svg",
-    component: <Text {...TextDefaultProps} />,
+    component: <Text {...defaultTextProps} />,
   },
   {
     label: "Button",

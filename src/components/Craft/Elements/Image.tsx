@@ -166,12 +166,12 @@ const Settings = () => {
   );
 };
 
-export const ImageDefaultProps = {
+export const defaultImageProps = {
   width: 100,
 };
 
 Image.craft = {
-  props: ImageDefaultProps,
+  props: defaultImageProps,
   related: {
     settings: Settings,
   },

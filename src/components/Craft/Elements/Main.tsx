@@ -2,8 +2,14 @@
 import { useNode } from "@craftjs/core";
 import { css } from "@emotion/react";
 import React from "react";
+import MainSettings from "../RightSidebar/MainSettings";
 
-export const Main = ({ background, padding, children, ...props }: any) => {
+export const Main = ({
+  children,
+  alignItems,
+  justifyContent,
+  ...props
+}: any) => {
   const {
     connectors: { connect, drag },
   } = useNode();
@@ -12,8 +18,13 @@ export const Main = ({ background, padding, children, ...props }: any) => {
       {...props}
       ref={(ref: HTMLElement) => connect(drag(ref))}
       css={css`
+        display: flex;
+        flex-direction: column;
+        align-items: ${alignItems};
+        justify-content: ${justifyContent};
         height: 100%;
         overflow: auto;
+        padding: 5px;
       `}
     >
       {children}
@@ -21,27 +32,34 @@ export const Main = ({ background, padding, children, ...props }: any) => {
   );
 };
 
-export const MainSettings = () => {
+export const Settings = () => {
   const {
-    background,
-    padding,
     actions: { setProp },
+    ...props
   } = useNode((node) => ({
-    background: node.data.props.background,
-    padding: node.data.props.padding,
+    props: node.data.props,
+    justifyContent: node.data.props.justifyContent,
+    flexDirection: node.data.props.justifyContent,
+    alignItems: node.data.props.alignItems,
   }));
 
-  return <div></div>;
+  return (
+    <>
+      <MainSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+    </>
+  );
 };
 
-export const ContainerDefaultProps = {
-  background: "#ffffff",
-  padding: 5,
-};
+export const ContainerDefaultProps = {};
 
 Main.craft = {
   props: ContainerDefaultProps,
   related: {
-    settings: MainSettings,
+    settings: Settings,
   },
 };

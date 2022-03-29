@@ -37,6 +37,7 @@ const FONTS = [
   "Work Sans",
   "Maven Pro",
   "Times New Roman",
+  '"Merriweather"',
 ];
 
 interface Props {

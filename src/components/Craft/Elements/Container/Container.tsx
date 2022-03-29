@@ -1,8 +1,12 @@
+import { useNode } from "@craftjs/core";
 import React from "react";
+import BackgroundColor from "../../RightSidebar/BackgroundColor";
+import ContainerSettings from "../../RightSidebar/ContainerSettings";
+import PaddingSettings from "../../RightSidebar/PaddingSettings";
 import { Resizer } from "./Resizer";
 
-export type ContainerProps = {
-  background: string;
+export type Props = {
+  backgroundColor: string;
   flexDirection: string;
   alignItems: string;
   justifyContent: string;
@@ -19,7 +23,7 @@ export type ContainerProps = {
   children: React.ReactNode;
 };
 
-const defaultProps = {
+const defaultContainerProps = {
   flexDirection: "column",
   alignItems: "flex-start",
   justifyContent: "flex-start",
@@ -35,16 +39,16 @@ const defaultProps = {
   height: "auto",
 };
 
-export const Container = (props: Partial<ContainerProps>) => {
+export const Container = (props: Partial<Props>) => {
   props = {
-    ...defaultProps,
+    ...defaultContainerProps,
     ...props,
   };
   const {
     flexDirection,
     alignItems,
     justifyContent,
-    background,
+    backgroundColor,
     marginTop,
     marginLeft,
     marginBottom,
@@ -59,10 +63,11 @@ export const Container = (props: Partial<ContainerProps>) => {
     <Resizer
       propKey={{ width: "width", height: "height" }}
       style={{
+        display: "flex",
         justifyContent,
         flexDirection,
         alignItems,
-        background: background,
+        backgroundColor,
         marginTop,
         marginLeft,
         marginBottom,
@@ -71,7 +76,6 @@ export const Container = (props: Partial<ContainerProps>) => {
         paddingLeft,
         paddingBottom,
         paddingRight,
-        flex: "unset",
       }}
     >
       {children}
@@ -79,13 +83,57 @@ export const Container = (props: Partial<ContainerProps>) => {
   );
 };
 
+export const Settings = () => {
+  const {
+    actions: { setProp },
+    ...props
+  } = useNode((node) => ({
+    props: node.data.props,
+    justifyContent: node.data.props.justifyContent,
+    flexDirection: node.data.props.justifyContent,
+    alignItems: node.data.props.alignItems,
+    width: node.data.props.width,
+    height: node.data.props.height,
+    paddingTop: node.data.props.paddingTop,
+    paddingLeft: node.data.props.paddingLeft,
+    paddingBottom: node.data.props.paddingBottom,
+    paddingRight: node.data.props.paddingRight,
+    backgroundColor: node.data.props.backgroundColor,
+  }));
+
+  return (
+    <>
+      <BackgroundColor
+        backgroundColor={props.backgroundColor}
+        setValue={(value: string | undefined, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+
+      <ContainerSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+
+      <PaddingSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+    </>
+  );
+};
+
 Container.craft = {
   displayName: "Container",
-  props: defaultProps,
+  props: defaultContainerProps,
   rules: {
     canDrag: () => true,
   },
-  // related: {
-  //   toolbar: ContainerSettings,
-  // },
+  related: {
+    settings: Settings,
+  },
 };

@@ -29,6 +29,7 @@ const Container = styled(motion.div)<{ isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 
   a {
     cursor: pointer !important;
@@ -201,7 +202,6 @@ export const Text = ({
     setEditable(false);
   }, [selected]);
 
-  console.log({ borderWidth, borderRadius, borderColor, borderStyle });
 
   if (!editor) return <></>;
   return (
@@ -303,7 +303,7 @@ const Settings = () => {
   );
 };
 
-export const TextDefaultProps = {
+export const defaultTextProps = {
   text: "",
   fontSize: 14,
   fontColor: "#1A202C",
@@ -324,7 +324,7 @@ export const TextDefaultProps = {
 };
 
 Text.craft = {
-  props: TextDefaultProps,
+  props: defaultTextProps,
   related: {
     settings: Settings,
   },

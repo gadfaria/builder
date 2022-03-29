@@ -32,7 +32,7 @@ const Range = styled.div`
 
 interface Props {
   value: number;
-  handleValueChange: (vle: string) => void;
+  handleValueChange: (vle: number) => void;
   label: string;
   max: number;
   min: number;
@@ -47,9 +47,9 @@ export default function InputRange(props: Props) {
           w={props.max < 1000 ? "75px" : "85px"}
           value={props.value}
           onChange={(vle) => {
-            let value = vle;
-            if (parseInt(value) > props.max) value = `${props.max}`;
-            if (parseInt(value) < props.min) value = `${props.min}`;
+            let value = parseInt(vle);
+            if (value > props.max) value = props.max;
+            if (value < props.min) value = props.min;
             props.handleValueChange(value);
           }}
         >
@@ -67,7 +67,7 @@ export default function InputRange(props: Props) {
           max={props.max || 100}
           min={props.min || 0}
           onChange={(vle) => {
-            props.handleValueChange(`${vle}`);
+            props.handleValueChange(vle);
           }}
         >
           <SliderTrack h="10px" borderRadius="8px" bg="#EEEEEE">
