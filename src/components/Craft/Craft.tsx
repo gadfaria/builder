@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Editor, Element, Frame } from "@craftjs/core";
+import { Editor, Element, Frame, useEditor } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
@@ -9,11 +9,11 @@ import { Container } from "./Elements/Container/Container";
 import { Main } from "./Elements/Main";
 import { Text } from "./Elements/Text/Text";
 import LeftSidebar from "./LeftSidebar/LeftSidebar";
-import { RightSidebar } from "./RightSidebar/RightSidebar";
+import RightSidebar from "./RightSidebar/RightSidebar";
 import TopBar from "./TopBar/TopBar";
 import { craftStyle } from "./utils/style";
 
-const Wrapper = styled.div<{ isPreview: boolean }>`
+const Wrapper = styled.div<{ isEnable: boolean }>`
   ${craftStyle}
   display: grid;
   max-width: 100vw;
@@ -28,11 +28,9 @@ const Wrapper = styled.div<{ isPreview: boolean }>`
   }
 
   ${(props) =>
-    props.isPreview &&
+    !props.isEnable &&
     css`
       display: block;
-      position: fixed;
-      grid-template-columns: 1px auto 1px;
       padding-top: 0px;
     `}
 `;
@@ -50,16 +48,28 @@ export default function Craft() {
         }}
         // onRender={RenderNode}
       >
-        <TopBar onSave={() => {}} />
-
-        <Wrapper isPreview={false} className="page-container">
-          <LeftSidebar />
-            <Frame>
-              <Element canvas is={Main} />
-            </Frame>
-          <RightSidebar />
-        </Wrapper>
+        <Content />
       </Editor>
+    </>
+  );
+}
+
+function Content() {
+  const { enabled, actions } = useEditor((state, query) => ({
+    enabled: state.options.enabled,
+  }));
+
+  return (
+    <>
+      <TopBar onSave={() => {}} />
+
+      <Wrapper isEnable={enabled}>
+        {enabled && <LeftSidebar />}
+        <Frame>
+          <Element canvas is={Main} />
+        </Frame>
+        {enabled && <RightSidebar />}
+      </Wrapper>
     </>
   );
 }

@@ -13,6 +13,7 @@ import {
   buttonSolidChakra,
   Flex,
 } from "../utils/style";
+import { css } from "@emotion/react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -69,13 +70,11 @@ export default function TopBar(props: Props): JSX.Element {
   const toast = useToast();
   const [isSaving, setIsSaving] = useState(false);
 
-  const { actions, query, enabled, canUndo, canRedo } = useEditor(
-    (state, query) => ({
-      enabled: state.options.enabled,
-      canUndo: state.options.enabled && query.history.canUndo(),
-      canRedo: state.options.enabled && query.history.canRedo(),
-    })
-  );
+  const { enabled, canUndo, canRedo, actions } = useEditor((state, query) => ({
+    enabled: state.options.enabled,
+    canUndo: query.history.canUndo(),
+    canRedo: query.history.canRedo(),
+  }));
 
   async function handleClickSave() {
     setIsSaving(true);
@@ -90,6 +89,20 @@ export default function TopBar(props: Props): JSX.Element {
       setIsSaving(false);
     }, 2000);
   }
+
+  if (!enabled)
+    return (
+      <div
+        css={css`
+          position: absolute;
+        `}
+        onClick={() => {
+          actions.setOptions((options) => (options.enabled = !enabled));
+        }}
+      >
+        botao
+      </div>
+    );
 
   return (
     <Wrapper>
@@ -118,7 +131,9 @@ export default function TopBar(props: Props): JSX.Element {
         <Button
           {...buttonDimensionsChakra}
           {...buttonOutlineChakra}
-          onClick={() => {}}
+          onClick={() => {
+            actions.setOptions((options) => (options.enabled = !enabled));
+          }}
         >
           Preview
         </Button>

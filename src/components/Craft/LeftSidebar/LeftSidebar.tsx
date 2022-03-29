@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Element } from "@craftjs/core";
+import { Element, useEditor } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
@@ -145,14 +145,15 @@ const variants = {
 
 export default function LeftSidebar() {
   const isLargerThan1680 = useMediaQuery("(min-width: 1680px)");
-  const [showLeftSideBar, setShowLeftSideBar] = useState(false);
-  const sidebarRef = useClickOutside(() => setShowLeftSideBar(false));
+  const [showSidebar, setShowSidebar] = useState(false);
+  const sidebarRef = useClickOutside(() => setShowSidebar(false));
+
   return (
     <>
       <SideBarButton
         css={css``}
         onClick={(e) => {
-          setShowLeftSideBar(!showLeftSideBar);
+          setShowSidebar(!showSidebar);
           e.stopPropagation();
         }}
         data-tip
@@ -172,7 +173,7 @@ export default function LeftSidebar() {
 
       <Sidebar
         ref={sidebarRef}
-        animate={isLargerThan1680 || showLeftSideBar ? "open" : "closed"}
+        animate={isLargerThan1680 || showSidebar ? "open" : "closed"}
         variants={variants}
         transition={{
           bounce: false,

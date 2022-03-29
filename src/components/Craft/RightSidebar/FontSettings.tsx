@@ -38,6 +38,8 @@ const FONTS = [
   "Maven Pro",
   "Times New Roman",
   '"Merriweather"',
+  '"Bebas Neue"',
+  '"DM Sans"'
 ];
 
 interface Props {

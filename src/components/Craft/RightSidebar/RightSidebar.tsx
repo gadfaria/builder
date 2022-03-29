@@ -1,9 +1,55 @@
+/** @jsxImportSource @emotion/react */
 import { Button, Center, Flex, Spacer } from "@chakra-ui/react";
 import { useEditor } from "@craftjs/core";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import React from "react";
-import { buttonErrorSolidChakra } from "../utils/style";
+import React, { useState } from "react";
+import { BsLayoutTextSidebar } from "react-icons/bs";
+import ReactTooltip from "react-tooltip";
+import useClickOutside from "../hooks/useClickOutside";
+import useMediaQuery from "../hooks/useMediaQuery";
+import { DEFAULT_COLOR } from "../utils/consts";
+import {
+  buttonErrorSolidChakra,
+  customTooltip,
+  TooltipText,
+} from "../utils/style";
+
+const SideBarButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: 20px;
+  z-index: 1;
+  right: 0;
+
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  transition: border-color 0.3s;
+
+  svg {
+    color: rgba(0, 0, 0, 0.16);
+
+    transition: color 0.3s;
+  }
+
+  :hover {
+    border-color: ${DEFAULT_COLOR};
+
+    svg {
+      color: ${DEFAULT_COLOR};
+    }
+  }
+`;
 
 export const SideBarText = styled.div`
   font-size: 14px;
@@ -62,8 +108,12 @@ const Sidebar = styled(motion.div)`
   }
 `;
 
-export const RightSidebar = () => {
-  const { actions, selected, isEnabled } = useEditor((state, query) => {
+export default function RightSidebar() {
+  const [showSidebar, setShowSidebar] = useState(false);
+  const sidebarRef = useClickOutside(() => setShowSidebar(false));
+  const isLargerThan1680 = useMediaQuery("(min-width: 1680px)");
+
+  const { actions, selected, enabled } = useEditor((state, query) => {
     const currentNodeId = query.getEvent("selected").last();
     let selected;
 
@@ -80,34 +130,77 @@ export const RightSidebar = () => {
 
     return {
       selected,
-      isEnabled: state.options.enabled,
+      enabled: state.options.enabled,
     };
   });
 
-  return isEnabled && selected ? (
-    <Sidebar>
-      <Flex m={25}>
-        <SideBarText>BUILDER STYLE</SideBarText>
-        <Spacer />
-        <SideBarText>{selected.name}</SideBarText>
-      </Flex>
+  const variants = {
+    open: {
+      // opacity: 1,
+      display: "block",
+    },
+    closed: {
+      // opacity: 0,
+      x: 300,
+      transitionEnd: {
+        display: "none",
+      },
+    },
+  };
 
-      {selected.settings && React.createElement(selected.settings)}
+  if (!selected) return <></>;
+  return (
+    <>
+      <SideBarButton
+        css={css``}
+        onClick={(e) => {
+          setShowSidebar(!showSidebar);
+          e.stopPropagation();
+        }}
+        data-tip
+        data-for="right-side-bar-element"
+      >
+        <BsLayoutTextSidebar />
+        <ReactTooltip
+          id="right-side-bar-element"
+          place="left"
+          effect="solid"
+          backgroundColor="#333333"
+          css={customTooltip}
+        >
+          <TooltipText>Element sidebar</TooltipText>
+        </ReactTooltip>
+      </SideBarButton>
 
-      {selected.isDeletable && (
-        <Center>
-          <Button
-            {...buttonErrorSolidChakra}
-            onClick={() => {
-              actions.delete(selected.id);
-            }}
-          >
-            Delete
-          </Button>
-        </Center>
-      )}
-    </Sidebar>
-  ) : (
-    <></>
+      <Sidebar
+        ref={sidebarRef}
+        animate={isLargerThan1680 || showSidebar ? "open" : "closed"}
+        variants={variants}
+        transition={{
+          bounce: false,
+        }}
+      >
+        <Flex m={25}>
+          <SideBarText>BUILDER STYLE</SideBarText>
+          <Spacer />
+          <SideBarText>{selected.name}</SideBarText>
+        </Flex>
+
+        {selected.settings && React.createElement(selected.settings)}
+
+        {selected.isDeletable && (
+          <Center>
+            <Button
+              {...buttonErrorSolidChakra}
+              onClick={() => {
+                actions.delete(selected.id);
+              }}
+            >
+              Delete
+            </Button>
+          </Center>
+        )}
+      </Sidebar>
+    </>
   );
-};
+}
