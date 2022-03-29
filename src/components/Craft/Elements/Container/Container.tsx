@@ -1,6 +1,7 @@
 import { useNode } from "@craftjs/core";
 import React from "react";
 import BackgroundColor from "../../RightSidebar/BackgroundColor";
+import BorderSettings from "../../RightSidebar/BorderSettings";
 import ContainerSettings from "../../RightSidebar/ContainerSettings";
 import PaddingSettings from "../../RightSidebar/PaddingSettings";
 import { Resizer } from "./Resizer";
@@ -20,6 +21,10 @@ export type Props = {
   paddingLeft: number;
   paddingBottom: number;
   paddingRight: number;
+  borderWidth: number;
+  borderRadius: number;
+  borderStyle: string;
+  borderColor: string;
   children: React.ReactNode;
 };
 
@@ -35,6 +40,10 @@ const defaultContainerProps = {
   paddingLeft: 0,
   paddingBottom: 0,
   paddingRight: 0,
+  borderWidth: 0,
+  borderRadius: 0,
+  borderStyle: "none",
+  borderColor: "#e2e8f0",
   width: "100%",
   height: "auto",
 };
@@ -57,6 +66,10 @@ export const Container = (props: Partial<Props>) => {
     paddingLeft,
     paddingBottom,
     paddingRight,
+    borderColor,
+    borderWidth,
+    borderRadius,
+    borderStyle,
     children,
   } = props;
   return (
@@ -76,6 +89,10 @@ export const Container = (props: Partial<Props>) => {
         paddingLeft,
         paddingBottom,
         paddingRight,
+        borderColor,
+        borderWidth,
+        borderRadius,
+        borderStyle,
       }}
     >
       {children}
@@ -99,6 +116,10 @@ export const Settings = () => {
     paddingBottom: node.data.props.paddingBottom,
     paddingRight: node.data.props.paddingRight,
     backgroundColor: node.data.props.backgroundColor,
+    borderWidth: node.data.props.borderWidth,
+    borderRadius: node.data.props.borderRadius,
+    borderStyle: node.data.props.borderStyle,
+    borderColor: node.data.props.borderColor,
   }));
 
   return (
@@ -118,6 +139,13 @@ export const Settings = () => {
       />
 
       <PaddingSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+
+      <BorderSettings
         {...props}
         setValue={(value: string | number, key: string) => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
