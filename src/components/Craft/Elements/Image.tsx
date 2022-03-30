@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useNode } from "@craftjs/core";
+import { useEditor, useNode } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { encode } from "base64-arraybuffer";
@@ -73,6 +73,10 @@ export const Image = ({ image, width, ...props }: any) => {
     dragged: state.events.dragged,
   }));
 
+  const { enabled } = useEditor((state, query) => ({
+    enabled: state.options.enabled,
+  }));
+
   const imageRef = useRef<HTMLInputElement>(null);
 
   async function onFileChange(e: any) {
@@ -103,25 +107,25 @@ export const Image = ({ image, width, ...props }: any) => {
   }
 
   return (
-    <div ref={(ref) => ref && connect(drag(ref))}>
+    <div
+      css={css`
+        width: ${width}%;
+        height: auto;
+      `}
+      ref={(ref) => ref && connect(drag(ref))}
+    >
       {image ? (
         <div
           css={css`
             position: relative;
           `}
         >
-          {
+          {!enabled && (
             <BackgroundImageIcons onClick={handleClearBackground}>
               <FaRegTrashAlt />
             </BackgroundImageIcons>
-          }
-          <ImageDiv
-            src={image}
-            css={css`
-              width: ${width}%;
-              height: auto;
-            `}
-          />
+          )}
+          <ImageDiv src={image} />
         </div>
       ) : (
         <>

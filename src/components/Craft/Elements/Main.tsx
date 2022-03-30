@@ -4,12 +4,17 @@ import { css } from "@emotion/react";
 import React from "react";
 import BackgroundColor from "../RightSidebar/BackgroundColor";
 import MainSettings from "../RightSidebar/MainSettings";
+import PaddingSettings from "../RightSidebar/PaddingSettings";
 
 export const Main = ({
   children,
   alignItems,
   justifyContent,
   backgroundColor,
+  paddingTop,
+  paddingBottom,
+  paddingRight,
+  paddingLeft,
   ...props
 }: any) => {
   const {
@@ -25,10 +30,10 @@ export const Main = ({
         align-items: ${alignItems};
         justify-content: ${justifyContent};
         background-color: ${backgroundColor};
+        width: 100%;
         height: 100%;
         overflow: auto;
-        padding: 5px;
-
+        padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px;
         * {
           max-width: calc(100vw - 610px);
         }
@@ -49,6 +54,10 @@ export const Settings = () => {
     flexDirection: node.data.props.justifyContent,
     alignItems: node.data.props.alignItems,
     backgroundColor: node.data.props.backgroundColor,
+    paddingTop: node.data.props.paddingTop,
+    paddingBottom: node.data.props.paddingBottom,
+    paddingRight: node.data.props.paddingRight,
+    paddingLeft: node.data.props.paddingLeft,
   }));
 
   return (
@@ -56,6 +65,12 @@ export const Settings = () => {
       <BackgroundColor
         backgroundColor={props.backgroundColor}
         setValue={(value: string | undefined, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+      <PaddingSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
@@ -71,6 +86,10 @@ export const Settings = () => {
 
 export const ContainerDefaultProps = {
   alignItems: "center",
+  paddingTop: 5,
+  paddingBottom: 5,
+  paddingRight: 5,
+  paddingLeft: 5,
 };
 
 Main.craft = {
