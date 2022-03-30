@@ -6,11 +6,11 @@ import {
   AccordionItem,
   AccordionPanel,
   FormControl,
-  FormLabel,
   HStack,
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Line = styled.div`
@@ -42,6 +42,7 @@ export default function ContainerSettings({
   height,
   setValue,
 }: Props) {
+  console.log({ flexDirection });
   return (
     <Accordion width="100%" allowMultiple>
       <AccordionItem>
@@ -50,7 +51,7 @@ export default function ContainerSettings({
           className="accordion-button"
           padding="10px"
         >
-          <div className="title-button">Container</div>
+          <div className="title-button">Alignment</div>
           <AccordionIcon />
         </AccordionButton>
 
@@ -61,15 +62,27 @@ export default function ContainerSettings({
           />
           <Line />
           <FormControl as="fieldset">
-            <FormLabel as="legend">Justify Content</FormLabel>
+            <Title>Justify Content</Title>
             <RadioGroup
               defaultValue={justifyContent}
               onChange={(e) => setValue(e, "justifyContent")}
             >
-              <HStack spacing="24px">
-                <Radio value="flex-start">Flex Start</Radio>
-                <Radio value="center">Center</Radio>
-                <Radio value="flex-end">Flex End</Radio>
+              <HStack
+                css={css`
+                  * {
+                    font-size: 15px !important;
+                  }
+                `}
+              >
+                <Radio colorScheme={"orange"} value="flex-start">
+                  Flex Start
+                </Radio>
+                <Radio colorScheme={"orange"} value="center">
+                  Center
+                </Radio>
+                <Radio colorScheme={"orange"} value="flex-end">
+                  Flex End
+                </Radio>
               </HStack>
             </RadioGroup>
           </FormControl>
@@ -77,14 +90,24 @@ export default function ContainerSettings({
           <Line />
 
           <FormControl as="fieldset">
-            <FormLabel as="legend">Flex Direction</FormLabel>
+            <Title>Flex Direction</Title>
             <RadioGroup
               defaultValue={flexDirection}
               onChange={(e) => setValue(e, "flexDirection")}
             >
-              <HStack spacing="24px">
-                <Radio value="row">Row</Radio>
-                <Radio value="column">Column</Radio>
+              <HStack
+                css={css`
+                  * {
+                    font-size: 15px !important;
+                  }
+                `}
+              >
+                <Radio colorScheme={"orange"} value="row">
+                  Row
+                </Radio>
+                <Radio colorScheme={"orange"} value="column">
+                  Column
+                </Radio>
               </HStack>
             </RadioGroup>
           </FormControl>
@@ -92,15 +115,27 @@ export default function ContainerSettings({
           <Line />
 
           <FormControl as="fieldset">
-            <FormLabel as="legend">Align Items</FormLabel>
+            <Title>Align Items</Title>
             <RadioGroup
               defaultValue={alignItems}
               onChange={(e) => setValue(e, "alignItems")}
             >
-              <HStack spacing="24px">
-                <Radio value="flex-start">Flex Start</Radio>
-                <Radio value="center">Center</Radio>
-                <Radio value="flex-end">Flex End</Radio>
+              <HStack
+                css={css`
+                  * {
+                    font-size: 15px !important;
+                  }
+                `}
+              >
+                <Radio colorScheme={"orange"} value="flex-start">
+                  Flex Start
+                </Radio>
+                <Radio colorScheme={"orange"} value="center">
+                  Center
+                </Radio>
+                <Radio colorScheme={"orange"} value="flex-end">
+                  Flex End
+                </Radio>
               </HStack>
             </RadioGroup>
           </FormControl>

@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { FaArrowsAlt, FaArrowUp, FaRegTrashAlt } from "react-icons/fa";
+import { DEFAULT_COLOR } from "../utils/consts";
 
 const IndicatorDiv = styled.div`
   height: 30px;
@@ -21,7 +22,8 @@ const IndicatorDiv = styled.div`
   color: #ffffff;
   display: flex;
   align-items: center;
-  background-color: red;
+  background-color: ${DEFAULT_COLOR};
+  border-radius: 5px 5px 0px 0px;
 
   svg {
     fill: #fff;
@@ -104,17 +106,17 @@ export const RenderNode = ({ render }: Props) => {
     currentDOM.style.left = left;
   }, [dom, getPos]);
 
-  // useEffect(() => {
-  //   document
-  //     .querySelector(".craftjs-renderer")
-  //     ?.addEventListener("scroll", scroll);
+  useEffect(() => {
+    document
+      .querySelector(".main-container")
+      ?.addEventListener("scroll", scroll);
 
-  //   return () => {
-  //     document
-  //       .querySelector(".craftjs-renderer")
-  //       ?.removeEventListener("scroll", scroll);
-  //   };
-  // }, [scroll]);
+    return () => {
+      document
+        .querySelector(".main-container")
+        ?.removeEventListener("scroll", scroll);
+    };
+  }, [scroll]);
 
   // if (!dom) return <></>;
 
@@ -133,7 +135,7 @@ export const RenderNode = ({ render }: Props) => {
                   }}
                 >
                   <Name>{name}</Name>
-                  {moveable ? (
+                  {moveable && (
                     <IconButton
                       css={css`
                         margin-right: 0.5rem;
@@ -143,7 +145,8 @@ export const RenderNode = ({ render }: Props) => {
                     >
                       <FaArrowsAlt />
                     </IconButton>
-                  ) : null}
+                  )}
+
                   {id !== ROOT_NODE && (
                     <IconButton
                       css={css`

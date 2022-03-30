@@ -45,11 +45,14 @@ export const craftStyle = css`
     left: 0;
     width: 100%;
     height: 100%;
-    border-width: 2px;
     border-style: dashed;
-    border-color: #55555560;
     border-radius: 5px;
     pointer-events: none;
+  }
+
+  .container-resizer::after {
+    border-width: 1px;
+    border-color: #55555560;
   }
 
   .component-selected {
@@ -58,6 +61,7 @@ export const craftStyle = css`
   .component-selected::after {
     border-color: ${DEFAULT_COLOR} !important;
     z-index: 2;
+    border-width: 2px;
   }
 `;
 

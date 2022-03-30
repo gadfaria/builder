@@ -99,7 +99,7 @@ const TYPES: Type[] = [
   {
     label: "Button",
     type: "BUTTON",
-    icon: "../icons/builder/text.svg",
+    icon: "../icons/builder/button.svg",
     component: <Button />,
   },
   {
@@ -109,9 +109,9 @@ const TYPES: Type[] = [
     component: <Image />,
   },
   {
-    label: "Column",
-    type: "COLUMN",
-    icon: "../icons/builder/text.svg",
+    label: "Container",
+    type: "CONTAINER",
+    icon: "../icons/builder/container.svg",
     component: (
       <Element canvas is={Container} custom={{ displayName: "Container" }} />
     ),

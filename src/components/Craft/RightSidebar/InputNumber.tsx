@@ -27,6 +27,7 @@ const Input = styled.input`
   width: 100%;
   border: none;
   text-indent: 5px;
+  outline: none;
 `;
 
 const Button = styled.div`

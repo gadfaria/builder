@@ -7,6 +7,7 @@ import {
   AccordionPanel,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import InputNumber from "./InputNumber";
 import InputRange from "./InputRange";
 
 const Line = styled.div`
@@ -41,35 +42,30 @@ export default function MarginSettings({
         </AccordionButton>
 
         <AccordionPanel borderBottom="1px solid #EBEBEB">
-          <InputRange
+          <InputNumber
             label="Top"
-            max={100}
-            min={-10}
-            value={marginTop}
+            value={marginTop || 0}
             handleValueChange={(vle) => setValue(vle, "marginTop")}
           />
           <Line />
-          <InputRange
+
+          <InputNumber
             label="Bottom"
-            max={100}
-            min={-10}
-            value={marginBottom}
+            value={marginBottom || 0}
             handleValueChange={(vle) => setValue(vle, "marginBottom")}
           />
           <Line />
-          <InputRange
+
+          <InputNumber
             label="Right"
-            max={100}
-            min={-10}
-            value={marginRight}
+            value={marginRight || 0}
             handleValueChange={(vle) => setValue(vle, "marginRight")}
           />
           <Line />
-          <InputRange
+
+          <InputNumber
             label="Left"
-            max={100}
-            min={-10}
-            value={marginLeft}
+            value={marginLeft || 0}
             handleValueChange={(vle) => setValue(vle, "marginLeft")}
           />
         </AccordionPanel>

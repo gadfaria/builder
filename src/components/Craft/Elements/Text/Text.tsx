@@ -64,7 +64,7 @@ const Empty = styled.div`
   flex-direction: column;
   background: #fff2e5;
   color: ${DEFAULT_COLOR};
-  border: 2px dashed ${DEFAULT_COLOR};
+  border: 1px dashed ${DEFAULT_COLOR};
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;

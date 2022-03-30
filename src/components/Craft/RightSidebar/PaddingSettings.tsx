@@ -7,7 +7,7 @@ import {
   AccordionPanel,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import InputRange from "./InputRange";
+import InputNumber from "./InputNumber";
 
 const Line = styled.div`
   margin: 20px 0px;
@@ -41,35 +41,30 @@ export default function PaddingSettings({
         </AccordionButton>
 
         <AccordionPanel borderBottom="1px solid #EBEBEB">
-          <InputRange
+          <InputNumber
             label="Top"
-            max={100}
-            min={0}
-            value={paddingTop}
+            value={paddingTop || 0}
             handleValueChange={(vle) => setValue(vle, "paddingTop")}
           />
           <Line />
-          <InputRange
+
+          <InputNumber
             label="Bottom"
-            max={100}
-            min={0}
-            value={paddingBottom}
+            value={paddingBottom || 0}
             handleValueChange={(vle) => setValue(vle, "paddingBottom")}
           />
           <Line />
-          <InputRange
+
+          <InputNumber
             label="Right"
-            max={100}
-            min={0}
-            value={paddingRight}
+            value={paddingRight || 0}
             handleValueChange={(vle) => setValue(vle, "paddingRight")}
           />
           <Line />
-          <InputRange
+
+          <InputNumber
             label="Left"
-            max={100}
-            min={0}
-            value={paddingLeft}
+            value={paddingLeft || 0}
             handleValueChange={(vle) => setValue(vle, "paddingLeft")}
           />
         </AccordionPanel>

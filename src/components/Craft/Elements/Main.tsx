@@ -4,7 +4,9 @@ import { css } from "@emotion/react";
 import React from "react";
 import BackgroundColor from "../RightSidebar/BackgroundColor";
 import MainSettings from "../RightSidebar/MainSettings";
+import MarginSettings from "../RightSidebar/MarginSettings";
 import PaddingSettings from "../RightSidebar/PaddingSettings";
+import { SettingsContainer } from "../RightSidebar/RightSidebar";
 
 export const Main = ({
   children,
@@ -15,6 +17,10 @@ export const Main = ({
   paddingBottom,
   paddingRight,
   paddingLeft,
+  marginTop,
+  marginBottom,
+  marginRight,
+  marginLeft,
   ...props
 }: any) => {
   const {
@@ -22,6 +28,7 @@ export const Main = ({
   } = useNode();
   return (
     <div
+      className="main-container"
       {...props}
       ref={(ref: HTMLElement) => connect(drag(ref))}
       css={css`
@@ -33,7 +40,10 @@ export const Main = ({
         width: 100%;
         height: 100%;
         overflow: auto;
-        padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px;
+        padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px
+          ${paddingLeft}px;
+        margin: ${marginTop}px ${marginRight}px ${marginBottom}px
+          ${marginLeft}px;
         * {
           max-width: calc(100vw - 610px);
         }
@@ -58,19 +68,18 @@ export const Settings = () => {
     paddingBottom: node.data.props.paddingBottom,
     paddingRight: node.data.props.paddingRight,
     paddingLeft: node.data.props.paddingLeft,
+
+    marginTop: node.data.props.marginTop,
+    marginBottom: node.data.props.marginBottom,
+    marginRight: node.data.props.marginRight,
+    marginLeft: node.data.props.marginLeft,
   }));
 
   return (
-    <>
+    <SettingsContainer>
       <BackgroundColor
         backgroundColor={props.backgroundColor}
         setValue={(value: string | undefined, key: string) => {
-          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
-        }}
-      />
-      <PaddingSettings
-        {...props}
-        setValue={(value: string | number, key: string) => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
@@ -80,7 +89,19 @@ export const Settings = () => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
-    </>
+      <MarginSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+      <PaddingSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+    </SettingsContainer>
   );
 };
 
@@ -90,6 +111,10 @@ export const ContainerDefaultProps = {
   paddingBottom: 5,
   paddingRight: 5,
   paddingLeft: 5,
+  marginTop: 0,
+  marginBottom: 0,
+  marginRight: 0,
+  marginLeft: 0,
 };
 
 Main.craft = {

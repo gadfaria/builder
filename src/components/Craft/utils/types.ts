@@ -1,4 +1,4 @@
-export type Types = "TEXT" | "BUTTON" | "IMAGE" | "COLUMN" | "FOOTER";
+export type Types = "TEXT" | "BUTTON" | "IMAGE" | "CONTAINER" | "FOOTER";
 
 export interface IBuilder {
   name: string;

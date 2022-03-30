@@ -11,6 +11,7 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Line = styled.div`
@@ -44,21 +45,33 @@ export default function MainSettings({
           className="accordion-button"
           padding="10px"
         >
-          <div className="title-button">Main</div>
+          <div className="title-button">Alignment</div>
           <AccordionIcon />
         </AccordionButton>
 
         <AccordionPanel borderBottom="1px solid #EBEBEB">
           <FormControl as="fieldset">
-            <FormLabel as="legend">Justify Content</FormLabel>
+            <Title as="legend">Justify Content</Title>
             <RadioGroup
               defaultValue={justifyContent}
               onChange={(e) => setValue(e, "justifyContent")}
             >
-              <HStack spacing="24px">
-                <Radio value="flex-start">Flex Start</Radio>
-                <Radio value="center">Center</Radio>
-                <Radio value="flex-end">Flex End</Radio>
+              <HStack
+                css={css`
+                  * {
+                    font-size: 15px !important;
+                  }
+                `}
+              >
+                <Radio colorScheme={"orange"} value="flex-start">
+                  Flex Start
+                </Radio>
+                <Radio colorScheme={"orange"} value="center">
+                  Center
+                </Radio>
+                <Radio colorScheme={"orange"} value="flex-end">
+                  Flex End
+                </Radio>
               </HStack>
             </RadioGroup>
           </FormControl>
@@ -66,15 +79,27 @@ export default function MainSettings({
           <Line />
 
           <FormControl as="fieldset">
-            <FormLabel as="legend">Align Items</FormLabel>
+            <Title>Align Items</Title>
             <RadioGroup
               defaultValue={alignItems}
               onChange={(e) => setValue(e, "alignItems")}
             >
-              <HStack spacing="24px">
-                <Radio value="flex-start">Flex Start</Radio>
-                <Radio value="center">Center</Radio>
-                <Radio value="flex-end">Flex End</Radio>
+              <HStack
+                css={css`
+                  * {
+                    font-size: 15px !important;
+                  }
+                `}
+              >
+                <Radio colorScheme={"orange"} value="flex-start">
+                  Flex Start
+                </Radio>
+                <Radio colorScheme={"orange"} value="center">
+                  Center
+                </Radio>
+                <Radio colorScheme={"orange"} value="flex-end">
+                  Flex End
+                </Radio>
               </HStack>
             </RadioGroup>
           </FormControl>

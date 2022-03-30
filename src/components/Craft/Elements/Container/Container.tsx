@@ -6,6 +6,7 @@ import BackgroundColor from "../../RightSidebar/BackgroundColor";
 import BorderSettings from "../../RightSidebar/BorderSettings";
 import ContainerSettings from "../../RightSidebar/ContainerSettings";
 import PaddingSettings from "../../RightSidebar/PaddingSettings";
+import { SettingsContainer } from "../../RightSidebar/RightSidebar";
 import { Resizer } from "./Resizer";
 
 export type Props = {
@@ -127,7 +128,7 @@ export const Settings = () => {
   }));
 
   return (
-    <>
+    <SettingsContainer>
       <BackgroundColor
         backgroundColor={props.backgroundColor}
         setValue={(value: string | undefined, key: string) => {
@@ -155,7 +156,7 @@ export const Settings = () => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
-    </>
+    </SettingsContainer>
   );
 };
 
