@@ -12,6 +12,7 @@ import LeftSidebar from "./LeftSidebar/LeftSidebar";
 import RightSidebar from "./RightSidebar/RightSidebar";
 import TopBar from "./TopBar/TopBar";
 import { craftStyle } from "./utils/style";
+import { RenderNode } from "./Editor/RenderNode";
 
 const Wrapper = styled.div<{ isEnable: boolean }>`
   ${craftStyle}
@@ -46,7 +47,7 @@ export default function Craft() {
           Container,
           Main,
         }}
-        // onRender={RenderNode}
+        onRender={RenderNode}
       >
         <Content />
       </Editor>
@@ -63,7 +64,7 @@ function Content() {
     <>
       <TopBar onSave={() => {}} />
 
-      <Wrapper isEnable={enabled}>
+      <Wrapper className="craft-container" isEnable={enabled}>
         {enabled && <LeftSidebar />}
         <Frame>
           <Element canvas is={Main} />

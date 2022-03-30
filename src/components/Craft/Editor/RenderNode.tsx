@@ -1,23 +1,27 @@
 /** @jsxImportSource @emotion/react */
-import { useNode, useEditor } from "@craftjs/core";
+import { useEditor, useNode } from "@craftjs/core";
 import { ROOT_NODE } from "@craftjs/utils";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-
-import {
-  FaArrowDown,
-  FaArrowsAlt,
-  FaArrowUp,
-  FaRegCopy,
-  FaRegTrashAlt,
-} from "react-icons/fa";
+import { FaArrowsAlt, FaArrowUp, FaRegTrashAlt } from "react-icons/fa";
 
 const IndicatorDiv = styled.div`
   height: 30px;
   margin-top: -29px;
   font-size: 12px;
   line-height: 12px;
+
+  position: fixed;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  background-color: red;
 
   svg {
     fill: #fff;
@@ -26,7 +30,7 @@ const IndicatorDiv = styled.div`
   }
 `;
 
-const Btn = styled.a`
+const IconButton = styled.a`
   padding: 0 0px;
   opacity: 0.9;
   display: flex;
@@ -36,6 +40,11 @@ const Btn = styled.a`
     top: -50%;
     left: -50%;
   }
+`;
+
+const Name = styled.h2`
+  margin-right: 1rem;
+  flex: 1 1 0%;
 `;
 
 interface Props {
@@ -107,49 +116,64 @@ export const RenderNode = ({ render }: Props) => {
   //   };
   // }, [scroll]);
 
-  if (!dom) return <></>;
+  // if (!dom) return <></>;
+
   return (
     <>
       {isHover || isActive
         ? ReactDOM.createPortal(
-            <IndicatorDiv
-              ref={currentRef}
-              className="px-2 py-2 text-white bg-primary fixed flex items-center"
-              style={{
-                left: getPos(dom).left,
-                top: getPos(dom).top,
-                zIndex: 9999,
-              }}
-            >
-              <h2 className="flex-1 mr-4">{name}</h2>
-              {moveable ? (
-                <Btn className="mr-2 cursor-move" ref={drag as any}>
-                  <FaArrowsAlt />
-                </Btn>
-              ) : null}
-              {id !== ROOT_NODE && (
-                <Btn
-                  className="mr-2 cursor-pointer"
-                  onClick={() => {
-                    actions.selectNode(parent);
+            name !== "Main" && (
+              <>
+                <IndicatorDiv
+                  ref={currentRef}
+                  style={{
+                    left: getPos(dom as HTMLElement).left,
+                    top: getPos(dom as HTMLElement).top,
+                    zIndex: 9999,
                   }}
                 >
-                  <FaArrowUp />
-                </Btn>
-              )}
-              {deletable ? (
-                <Btn
-                  className="cursor-pointer"
-                  onMouseDown={(e: React.MouseEvent) => {
-                    e.stopPropagation();
-                    actions.delete(id);
-                  }}
-                >
-                  <FaRegTrashAlt />
-                </Btn>
-              ) : null}
-            </IndicatorDiv>,
-            document.querySelector(".page-container") as HTMLElement
+                  <Name>{name}</Name>
+                  {moveable ? (
+                    <IconButton
+                      css={css`
+                        margin-right: 0.5rem;
+                        cursor: move;
+                      `}
+                      ref={drag as any}
+                    >
+                      <FaArrowsAlt />
+                    </IconButton>
+                  ) : null}
+                  {id !== ROOT_NODE && (
+                    <IconButton
+                      css={css`
+                        margin-right: 0.5rem;
+                        cursor: move;
+                      `}
+                      onClick={() => {
+                        actions.selectNode(parent);
+                      }}
+                    >
+                      <FaArrowUp />
+                    </IconButton>
+                  )}
+                  {deletable && (
+                    <IconButton
+                      css={css`
+                        cursor: pointer;
+                      `}
+                      onClick={(e: React.MouseEvent) => {
+                        e.stopPropagation();
+                        actions.delete(id);
+                      }}
+                    >
+                      <FaRegTrashAlt />
+                    </IconButton>
+                  )}
+                </IndicatorDiv>
+              </>
+            ),
+            document.querySelector(".craft-container") as HTMLElement
           )
         : null}
       {render}

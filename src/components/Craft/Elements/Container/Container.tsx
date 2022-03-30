@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import { useNode } from "@craftjs/core";
+import { css } from "@emotion/react";
 import React from "react";
 import BackgroundColor from "../../RightSidebar/BackgroundColor";
 import BorderSettings from "../../RightSidebar/BorderSettings";
@@ -75,8 +77,10 @@ export const Container = (props: Partial<Props>) => {
   return (
     <Resizer
       propKey={{ width: "width", height: "height" }}
+      className='container-resizer'
       style={{
         display: "flex",
+        position: "relative",
         justifyContent,
         flexDirection,
         alignItems,

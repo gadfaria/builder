@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useEditor, useNode } from "@craftjs/core";
 import styled from "@emotion/styled";
-import cx from "classnames";
 import { debounce } from "debounce";
 import { Resizable } from "re-resizable";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -171,12 +170,6 @@ export const Resizer = ({ propKey, children, ...props }: any) => {
         acc[key] = active && inNodeContext;
         return acc;
       }, {})}
-      className={cx([
-        {
-          "m-auto": isRootNode,
-          flex: true,
-        },
-      ])}
       ref={(ref) => {
         if (ref) {
           (resizable as any).current = ref;

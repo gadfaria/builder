@@ -34,6 +34,31 @@ export const craftStyle = css`
   *::-webkit-scrollbar-thumb:hover {
     background-color: rgba(168, 168, 168, 0.7);
   }
+
+  /* RENDER NODE */
+
+  .container-resizer::after,
+  .component-selected::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: blue;
+    border-radius: 5px;
+    pointer-events: none;
+  }
+
+  .component-selected {
+    position: relative;
+  }
+  .component-selected::after {
+    border-color: ${DEFAULT_COLOR} !important;
+    z-index: 2;
+  }
 `;
 
 export const notSelect = css`
