@@ -45,9 +45,9 @@ export const craftStyle = css`
     left: 0;
     width: 100%;
     height: 100%;
-    border-width: 1px;
+    border-width: 2px;
     border-style: dashed;
-    border-color: blue;
+    border-color: #55555560;
     border-radius: 5px;
     pointer-events: none;
   }

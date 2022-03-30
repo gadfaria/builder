@@ -64,8 +64,8 @@ const Empty = styled.div`
   flex-direction: column;
   background: #fff2e5;
   color: ${DEFAULT_COLOR};
-  border: 1px dashed ${DEFAULT_COLOR};
-  border-radius: 8px;
+  border: 2px dashed ${DEFAULT_COLOR};
+  border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 0px;
@@ -214,10 +214,10 @@ export const Text = ({
         line-height: ${lineSpacing}em;
         color: ${fontColor};
         font-family: ${fontFamily};
-        margin: ${marginTop}% ${marginRight}% ${marginBottom}% ${marginLeft}%;
-        padding: ${paddingTop}% ${paddingRight}% ${paddingBottom}% ${paddingLeft}%;
+        margin: ${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px;
+        padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px;
         border-width: ${borderWidth}px;
-        border-radius: ${borderRadius}%;
+        border-radius: ${borderRadius}px;
         border-color: ${borderColor};
         border-style: ${borderStyle};
         background-color: ${backgroundColor};
@@ -310,7 +310,7 @@ export const defaultTextProps = {
   lineSpacing: 1,
   fontFamily: "Source Sans Pro",
   marginTop: 0,
-  marginBottom: 0,
+  marginBottom: 5,
   marginLeft: 0,
   marginRight: 0,
   paddingTop: 0,

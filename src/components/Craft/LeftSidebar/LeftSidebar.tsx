@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Element, useEditor } from "@craftjs/core";
+import { Element } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
@@ -9,7 +9,7 @@ import ReactTooltip from "react-tooltip";
 import { Button } from "../Elements/Button";
 import { Container } from "../Elements/Container/Container";
 import { Image } from "../Elements/Image";
-import { Text, defaultTextProps } from "../Elements/Text/Text";
+import { defaultTextProps, Text } from "../Elements/Text/Text";
 import useClickOutside from "../hooks/useClickOutside";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { DEFAULT_COLOR } from "../utils/consts";
@@ -113,18 +113,7 @@ const TYPES: Type[] = [
     type: "COLUMN",
     icon: "../icons/builder/text.svg",
     component: (
-      <Element
-        canvas
-        is={Container}
-        flexDirection="row"
-        width="100%"
-        height="auto"
-        paddingBottom={40}
-        paddingLeft={40}
-        paddingRight={40}
-        paddingTop={40}
-        custom={{ displayName: "Introduction" }}
-      />
+      <Element canvas is={Container} custom={{ displayName: "Container" }} />
     ),
   },
 ];
