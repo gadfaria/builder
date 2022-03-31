@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useToast } from "@chakra-ui/react";
 import { useEditor, useNode } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -73,6 +74,8 @@ export const Image = ({ image, width, ...props }: any) => {
     dragged: state.events.dragged,
   }));
 
+  const toast = useToast();
+
   const { enabled } = useEditor((state, query) => ({
     enabled: state.options.enabled,
   }));
@@ -82,6 +85,17 @@ export const Image = ({ image, width, ...props }: any) => {
   async function onFileChange(e: any) {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+
+      if (file.size > 2 * 1024 * 1024) {
+        toast({
+          title: "Your image is larger than 2MB.",
+          description: "Please pick a smaller image.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        return;
+      }
       const reader = new FileReader();
 
       reader.onabort = () => console.log("file reading was aborted");
@@ -120,7 +134,7 @@ export const Image = ({ image, width, ...props }: any) => {
             position: relative;
           `}
         >
-          {!enabled && (
+          {enabled && (
             <BackgroundImageIcons onClick={handleClearBackground}>
               <FaRegTrashAlt />
             </BackgroundImageIcons>

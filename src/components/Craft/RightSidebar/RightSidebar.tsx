@@ -192,6 +192,7 @@ export default function RightSidebar() {
           <Center>
             <Button
               {...buttonErrorSolidChakra}
+              marginTop={25}
               onClick={() => {
                 actions.delete(selected.id);
               }}

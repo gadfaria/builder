@@ -56,11 +56,6 @@ export default function ContainerSettings({
         </AccordionButton>
 
         <AccordionPanel borderBottom="1px solid #EBEBEB">
-          <input
-            value={width}
-            onChange={(e) => setValue(e.target.value, "width")}
-          />
-          <Line />
           <FormControl as="fieldset">
             <Title>Justify Content</Title>
             <RadioGroup

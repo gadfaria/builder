@@ -5,8 +5,10 @@ import React from "react";
 import BackgroundColor from "../../RightSidebar/BackgroundColor";
 import BorderSettings from "../../RightSidebar/BorderSettings";
 import ContainerSettings from "../../RightSidebar/ContainerSettings";
+import MarginSettings from "../../RightSidebar/MarginSettings";
 import PaddingSettings from "../../RightSidebar/PaddingSettings";
 import { SettingsContainer } from "../../RightSidebar/RightSidebar";
+import SizeSettings from "../../RightSidebar/SizeSettings";
 import { Resizer } from "./Resizer";
 
 export type Props = {
@@ -78,7 +80,7 @@ export const Container = (props: Partial<Props>) => {
   return (
     <Resizer
       propKey={{ width: "width", height: "height" }}
-      className='container-resizer'
+      className="container-resizer"
       style={{
         display: "flex",
         position: "relative",
@@ -120,6 +122,10 @@ export const Settings = () => {
     paddingLeft: node.data.props.paddingLeft,
     paddingBottom: node.data.props.paddingBottom,
     paddingRight: node.data.props.paddingRight,
+    marginTop: node.data.props.marginTop,
+    marginLeft: node.data.props.marginLeft,
+    marginBottom: node.data.props.marginBottom,
+    marginRight: node.data.props.marginRight,
     backgroundColor: node.data.props.backgroundColor,
     borderWidth: node.data.props.borderWidth,
     borderRadius: node.data.props.borderRadius,
@@ -136,7 +142,21 @@ export const Settings = () => {
         }}
       />
 
+      <SizeSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+
       <ContainerSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+
+      <MarginSettings
         {...props}
         setValue={(value: string | number, key: string) => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
