@@ -202,7 +202,6 @@ export const Text = ({
     setEditable(false);
   }, [selected]);
 
-
   if (!editor) return <></>;
   return (
     <Container
@@ -214,8 +213,10 @@ export const Text = ({
         line-height: ${lineSpacing}em;
         color: ${fontColor};
         font-family: ${fontFamily};
-        margin: ${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px;
-        padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px;
+        margin: ${marginTop}px ${marginRight}px ${marginBottom}px
+          ${marginLeft}px;
+        padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px
+          ${paddingLeft}px;
         border-width: ${borderWidth}px;
         border-radius: ${borderRadius}px;
         border-color: ${borderColor};
@@ -224,17 +225,17 @@ export const Text = ({
       `}
     >
       {!editable && editor.isEmpty ? (
-        <motion.div layoutId={`editor-${id}`}>
-          <Empty>Add text</Empty>
-        </motion.div>
+        // <motion.div layoutId={`editor-${id}`}>
+        <Empty>Add text</Empty>
       ) : (
-        <motion.div layoutId={`editor-${id}`}>
-          <EditorContent editor={editor} />
-        </motion.div>
+        // </motion.div>
+        // <motion.div layoutId={`editor-${id}`}>
+        <EditorContent editor={editor} />
+        // </motion.div>
       )}
-      <motion.div layoutId={`editor-menu-${id}`}>
-        {editor && editable && <MenuBar editor={editor} />}
-      </motion.div>
+      {/* <motion.div layoutId={`editor-menu-${id}`}> */}
+      {editor && editable && <MenuBar editor={editor} />}
+      {/* </motion.div> */}
     </Container>
   );
 };

@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useNode } from "@craftjs/core";
-import { css } from "@emotion/react";
+import { useEditor, useNode } from "@craftjs/core";
 import React from "react";
 import BackgroundColor from "../../RightSidebar/BackgroundColor";
 import BorderSettings from "../../RightSidebar/BorderSettings";
@@ -77,10 +76,14 @@ export const Container = (props: Partial<Props>) => {
     borderStyle,
     children,
   } = props;
+
+  const { enabled } = useEditor((state, query) => ({
+    enabled: state.options.enabled,
+  }));
   return (
     <Resizer
       propKey={{ width: "width", height: "height" }}
-      className="container-resizer"
+      className={enabled && "container-resizer"}
       style={{
         display: "flex",
         position: "relative",
