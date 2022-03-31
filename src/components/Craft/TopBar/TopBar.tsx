@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { Button, useToast } from "@chakra-ui/react";
 import { useEditor } from "@craftjs/core";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
+import lz from "lzutf8";
 import React, { useState } from "react";
 import { FaRedo, FaUndo } from "react-icons/fa";
 import { FiChevronRight } from "react-icons/fi";
-import { IBuilder } from "../utils/types";
 import {
   buttonDimensionsChakra,
   buttonOutlineChakra,
   buttonSolidChakra,
   Flex,
 } from "../utils/style";
-import { css } from "@emotion/react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -63,21 +63,27 @@ const Icon = styled.div`
 `;
 
 interface Props {
-  onSave: (builder: IBuilder) => void;
+  handleClickSave: (builderStructure: string) => void;
 }
 
 export default function TopBar(props: Props): JSX.Element {
   const toast = useToast();
   const [isSaving, setIsSaving] = useState(false);
 
-  const { enabled, canUndo, canRedo, actions } = useEditor((state, query) => ({
-    enabled: state.options.enabled,
-    canUndo: query.history.canUndo(),
-    canRedo: query.history.canRedo(),
-  }));
+  const { enabled, canUndo, canRedo, actions, query } = useEditor(
+    (state, query) => ({
+      enabled: state.options.enabled,
+      canUndo: query.history.canUndo(),
+      canRedo: query.history.canRedo(),
+    })
+  );
 
   async function handleClickSave() {
     setIsSaving(true);
+    const json = query.serialize();
+    const encode = lz.encodeBase64(lz.compress(json));
+
+    props.handleClickSave(encode);
 
     setTimeout(() => {
       toast({

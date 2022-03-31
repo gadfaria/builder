@@ -3,11 +3,8 @@ export type Types = "TEXT" | "BUTTON" | "IMAGE" | "CONTAINER" | "FOOTER";
 export interface IBuilder {
   name: string;
   pageTitle?: string;
-  url: string;
   createdAt: Date;
-  builder?: any;
-  thankYouBuilder?: any;
-  hasThankYouBuilder?: boolean;
+  builder?: string;
 }
 
 export interface ItemType {

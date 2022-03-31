@@ -46,7 +46,8 @@
     "react-dropzone": "^12.0.4",
     "react-icons": "^4.3.1",
     "react-phone-input-2": "^2.15.0",
-    "react-tooltip": "^4.2.21"
+    "react-tooltip": "^4.2.21",
+    "recoil": "^0.6.1"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.1",
