@@ -1,5 +1,6 @@
 import {
   Button as ChakraButton,
+  Checkbox,
   FormControl,
   FormLabel,
   HStack,
@@ -18,6 +19,7 @@ export const Button = ({
   text,
   width,
   height,
+  isBuyButton,
   ...props
 }: any) => {
   const {
@@ -25,6 +27,7 @@ export const Button = ({
   } = useNode();
   return (
     <ChakraButton
+      id={isBuyButton ? "buy_button" : undefined}
       ref={(ref) => ref && connect(drag(ref))}
       bg={backgroundColor}
       width={`${width}px`}
@@ -47,6 +50,7 @@ export const Settings = () => {
     width: node.data.props.width,
     height: node.data.props.height,
     backgroundColor: node.data.props.backgroundColor,
+    isBuyButton: node.data.props.isBuyButton,
   }));
 
   return (
@@ -57,6 +61,23 @@ export const Settings = () => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
+      <Checkbox
+        m={5}
+        size="lg"
+        colorScheme="orange"
+        defaultIsChecked={props.isBuyButton}
+        isChecked={props.isBuyButton}
+        onChange={(evt) => {
+          setProp(
+            (prop: Record<string, any>) =>
+              (prop.isBuyButton = evt.target.checked),
+            1000
+          );
+        }}
+      >
+        Buy Button
+      </Checkbox>
+
       <ButtonSettings
         {...props}
         setValue={(value: string | number, key: string) => {

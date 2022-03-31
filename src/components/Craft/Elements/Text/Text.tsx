@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { useNode } from "@craftjs/core";
+import { Checkbox } from "@chakra-ui/react";
+import { useEditor, useNode } from "@craftjs/core";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import BulletList from "@tiptap/extension-bullet-list";
@@ -11,7 +12,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import TiptapText from "@tiptap/extension-text";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, useEditor as TiptapEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -25,7 +26,7 @@ import { SettingsContainer } from "../../RightSidebar/RightSidebar";
 import { DEFAULT_COLOR } from "../../utils/consts";
 import MenuBar from "./MenuBar";
 
-const Container = styled(motion.div)<{ isSelected: boolean }>`
+const Container = styled(motion.div)<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,7 +40,7 @@ const Container = styled(motion.div)<{ isSelected: boolean }>`
     margin: 10px 10px 10px;
   }
   ${(props) =>
-    props.isSelected &&
+    props.selected &&
     css`
       min-height: 135px;
 
@@ -91,6 +92,7 @@ interface Props {
   borderStyle: string;
   borderColor: string;
   backgroundColor?: string;
+  isCancelText?: boolean;
 }
 
 export const Text = ({
@@ -112,6 +114,7 @@ export const Text = ({
   borderStyle,
   borderColor,
   backgroundColor,
+  isCancelText,
 }: Props) => {
   const {
     connectors: { connect, drag },
@@ -123,9 +126,13 @@ export const Text = ({
     dragged: state.events.dragged,
   }));
 
+  const { enabled } = useEditor((state, query) => ({
+    enabled: state.options.enabled,
+  }));
+
   const [editable, setEditable] = useState(false);
 
-  const editor = useEditor({
+  const editor = TiptapEditor({
     extensions: [
       StarterKit.configure({
         code: false,
@@ -205,9 +212,10 @@ export const Text = ({
   if (!editor) return <></>;
   return (
     <Container
+      id={isCancelText ? "cancel_button" : undefined}
       ref={(ref) => ref && connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
-      isSelected={selected}
+      selected={selected}
       css={css`
         font-size: ${fontSize}px;
         line-height: ${lineSpacing}em;
@@ -222,6 +230,11 @@ export const Text = ({
         border-color: ${borderColor};
         border-style: ${borderStyle};
         background-color: ${backgroundColor};
+        ${isCancelText &&
+        !enabled &&
+        css`
+          cursor: pointer;
+        `}
       `}
     >
       {!editable && editor.isEmpty ? (
@@ -263,6 +276,7 @@ const Settings = () => {
     borderStyle: node.data.props.borderStyle,
     borderColor: node.data.props.borderColor,
     backgroundColor: node.data.props.backgroundColor,
+    isCancelText: node.data.props.isCancelText,
   }));
 
   return (
@@ -273,6 +287,22 @@ const Settings = () => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
         }}
       />
+      <Checkbox
+        m={5}
+        size="lg"
+        colorScheme="orange"
+        defaultIsChecked={props.isCancelText}
+        isChecked={props.isCancelText}
+        onChange={(evt) => {
+          setProp(
+            (prop: Record<string, any>) =>
+              (prop.isCancelText = evt.target.checked),
+            1000
+          );
+        }}
+      >
+        Cancel Button
+      </Checkbox>
       <MarginSettings
         {...props}
         setValue={(value: string | number, key: string) => {
