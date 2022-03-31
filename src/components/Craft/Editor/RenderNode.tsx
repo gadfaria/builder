@@ -55,8 +55,9 @@ interface Props {
 
 export const RenderNode = ({ render }: Props) => {
   const { id } = useNode();
-  const { actions, query, isActive } = useEditor((_, query) => ({
+  const { actions, query, isActive, enabled } = useEditor((state, query) => ({
     isActive: query.getEvent("selected").contains(id),
+    enabled: state.options.enabled,
   }));
 
   const {
@@ -80,7 +81,7 @@ export const RenderNode = ({ render }: Props) => {
   const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (dom) {
+    if (dom && enabled) {
       if (isActive || isHover) dom.classList.add("component-selected");
       else dom.classList.remove("component-selected");
     }
@@ -124,7 +125,7 @@ export const RenderNode = ({ render }: Props) => {
     <>
       {isHover || isActive
         ? ReactDOM.createPortal(
-            name !== "Main" && (
+            enabled && name !== "Main" && (
               <>
                 <IndicatorDiv
                   ref={currentRef}

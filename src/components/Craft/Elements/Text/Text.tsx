@@ -130,7 +130,7 @@ export const Text = ({
     enabled: state.options.enabled,
   }));
 
-  const [editable, setEditable] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
   const editor = TiptapEditor({
     extensions: [
@@ -180,7 +180,7 @@ export const Text = ({
       TiptapLink,
     ],
     content: text,
-    // editable: !isPreview,
+    editable: enabled,
     onUpdate: () => {
       if (setEmailFunc.current) setEmailFunc.current();
     },
@@ -206,15 +206,19 @@ export const Text = ({
     if (selected) {
       return;
     }
-    setEditable(false);
+    setIsSelected(false);
   }, [selected]);
+
+  useEffect(() => {
+    editor?.setEditable(enabled);
+  }, [enabled]);
 
   if (!editor) return <></>;
   return (
     <Container
       id={isCancelText ? "cancel_button" : undefined}
       ref={(ref) => ref && connect(drag(ref))}
-      onClick={() => selected && setEditable(true)}
+      onClick={() => selected && setIsSelected(true)}
       selected={selected}
       css={css`
         font-size: ${fontSize}px;
@@ -237,7 +241,7 @@ export const Text = ({
         `}
       `}
     >
-      {!editable && editor.isEmpty ? (
+      {enabled && !isSelected && editor.isEmpty ? (
         // <motion.div layoutId={`editor-${id}`}>
         <Empty>Add text</Empty>
       ) : (
@@ -247,7 +251,7 @@ export const Text = ({
         // </motion.div>
       )}
       {/* <motion.div layoutId={`editor-menu-${id}`}> */}
-      {editor && editable && <MenuBar editor={editor} />}
+      {editor && isSelected && <MenuBar editor={editor} />}
       {/* </motion.div> */}
     </Container>
   );

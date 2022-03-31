@@ -51,14 +51,18 @@ export default function ButtonSettings({
         </AccordionButton>
 
         <AccordionPanel borderBottom="1px solid #EBEBEB">
-          <input
-            value={width}
-            onChange={(e) => setValue(e.target.value, "width")}
+          <InputNumber
+            label="Width (px)"
+            value={width || 0}
+            handleValueChange={(vle) => setValue(`${vle}px`, "width")}
           />
 
-          <input
-            value={height}
-            onChange={(e) => setValue(e.target.value, "height")}
+          <Line />
+
+          <InputNumber
+            label="Height (px)"
+            value={height || 0}
+            handleValueChange={(vle) => setValue(`${vle}px`, "height")}
           />
 
           <Title>Button Text</Title>
