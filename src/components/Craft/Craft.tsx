@@ -33,6 +33,7 @@ const Wrapper = styled.div<{ isEnable: boolean }>`
     css`
       display: block;
       padding-top: 0px;
+      height: 100vh;
     `}
 `;
 
