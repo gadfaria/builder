@@ -20,10 +20,15 @@ import { debounce } from "../../hooks/useDebounce";
 import BackgroundColor from "../../RightSidebar/BackgroundColor";
 import BorderSettings from "../../RightSidebar/BorderSettings";
 import FontSettings from "../../RightSidebar/FontSettings";
+import LinkSettings from "../../RightSidebar/LinkSettings";
 import MarginSettings from "../../RightSidebar/MarginSettings";
 import PaddingSettings from "../../RightSidebar/PaddingSettings";
 import { SettingsContainer } from "../../RightSidebar/RightSidebar";
-import { DEFAULT_COLOR } from "../../utils/consts";
+import {
+  DEFAULT_COLOR,
+  DEFAULT_COLOR_LINK,
+  DEFAULT_VISITED_COLOR_LINK,
+} from "../../utils/consts";
 import MenuBar from "./MenuBar";
 
 const Container = styled(motion.div)<{ selected: boolean }>`
@@ -91,6 +96,8 @@ interface Props {
   borderRadius: number;
   borderStyle: string;
   borderColor: string;
+  linkColor?: string;
+  visitedLinkColor?: string;
   backgroundColor?: string;
   isCancelText?: boolean;
 }
@@ -115,6 +122,8 @@ export const Text = ({
   borderColor,
   backgroundColor,
   isCancelText,
+  linkColor,
+  visitedLinkColor,
 }: Props) => {
   const {
     connectors: { connect, drag },
@@ -221,6 +230,12 @@ export const Text = ({
       onClick={() => selected && setIsSelected(true)}
       selected={selected}
       css={css`
+        a {
+          color: ${linkColor || DEFAULT_COLOR_LINK} !important;
+          :visited {
+            color: ${visitedLinkColor || DEFAULT_VISITED_COLOR_LINK} !important;
+          }
+        }
         font-size: ${fontSize}px;
         line-height: ${lineSpacing}em;
         color: ${fontColor};
@@ -281,6 +296,8 @@ const Settings = () => {
     borderColor: node.data.props.borderColor,
     backgroundColor: node.data.props.backgroundColor,
     isCancelText: node.data.props.isCancelText,
+    linkColor: node.data.props.linkColor,
+    visitedLinkColor: node.data.props.visitedLinkColor,
   }));
 
   return (
@@ -329,6 +346,12 @@ const Settings = () => {
       />
 
       <FontSettings
+        {...props}
+        setValue={(value: string | number, key: string) => {
+          setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
+        }}
+      />
+      <LinkSettings
         {...props}
         setValue={(value: string | number, key: string) => {
           setProp((prop: Record<string, any>) => (prop[key] = value), 1000);
